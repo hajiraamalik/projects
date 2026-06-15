@@ -1,0 +1,1521 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --highlight-color: #C2B6C6;
+    --gray-text: #D1D1D1;
+    --font-inter: 'Inter', sans-serif;
+    --font-urdu: 'Noto Nastaliq Urdu', serif;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+    background: transparent;
+    color: #FF0000;
+}
+
+/* Specific exclusions for non-selectable text */
+.english-name,
+.urdu-name-img,
+.project-title-neutral,
+.urdu-font {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-inter);
+    font-weight: 500;
+    /* Medium for body */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+.bold {
+    font-weight: 700;
+    /* Bold/Semi-bold for headers */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Layout */
+.layout {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 100px 0 10px 0;
+    position: relative;
+    /* Extra top padding to clear the fixed nav */
+    justify-self: end;
+
+}
+
+/* Fixed Elements */
+.fixed-element {
+    position: fixed;
+    z-index: 100;
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+    /* Standardized to match gallery/content margins */
+    position: absolute !important;
+    z-index: 2000;
+}
+
+.top-left {
+    top: 50px;
+    left: 20px;
+    /* Symmetric placement */
+    position: absolute !important;
+    z-index: 2000;
+}
+
+/* English Name & Hover Tooltip */
+.english-name-wrapper {
+    text-align: left;
+}
+
+.english-name {
+    font-family: var(--font-inter);
+    font-size: 50px;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #fe002c;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.pronunciation-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: max-content;
+    font-family: var(--font-inter);
+    font-size: 14px;
+    /* ~11-12pt */
+    color: black;
+    text-align: left;
+    padding-top: 8px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    line-height: 1;
+    white-space: pre-line;
+}
+
+.english-name:hover .pronunciation-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.def-italic {
+    font-style: italic;
+}
+
+.bottom-right {
+    bottom: 30px;
+    right: 40px;
+    position: fixed;
+    z-index: 2000;
+}
+
+.urdu-name-img {
+    height: 120px;
+    /* Restored size */
+    width: auto;
+    display: block;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.menu-ur {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    direction: rtl;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: var(--font-urdu);
+}
+
+.urdu-font {
+    font-family: var(--font-urdu);
+    font-size: 1.2em;
+    /* Slightly larger as Nastaliq can appear small */
+}
+
+.menu-ur a {
+    transition: color 0.2s ease;
+}
+
+.menu-ur a:hover {
+    color: var(--highlight-color);
+}
+
+/* Boxed Navigation Styling (Tillmann Franzen Style) */
+.boxed-nav {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    z-index: 2000;
+    /* Above everything */
+    background-color: transparent;
+    /* Keep it clean */
+}
+
+.nav-box {
+    height: 60px;
+    /* Precise height */
+    border: 1px solid black;
+    margin-right: -1px;
+    /* Collapse borders */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 35px;
+    /* Generous horizontal padding */
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    text-transform: lowercase;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    background-color: white !important;
+    /* Restore white background fill */
+}
+
+.nav-box:hover {
+    border-color: #fe002c;
+    color: #fe002c;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* Perfect circle */
+    margin-right: 0px;
+    /* Space between circle and boxes */
+    padding: 0;
+    font-family: serif;
+    font-style: italic;
+    font-size: 20px;
+}
+
+
+.icon-box:hover {
+    border-color: #fe002c;
+    color: #fe002c;
+    background-color: white !important;
+}
+
+/* Profile Section */
+.profile-section {
+    width: 100%;
+    padding: 0 5% 20px 5%;
+    /* Aligned at 5% */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+}
+
+
+.profile-bio {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.profile-bio p {
+    margin-bottom: 20px;
+}
+
+.profile-bio a {
+    font-weight: 400;
+    /* Regular weight for links */
+}
+
+/* Separator Line (Semiotik style) */
+.separator-line {
+    width: 50%;
+    /* Adjusted for profile-left column roughly */
+    height: 0;
+    border-bottom: 1px solid black;
+    margin-left: 7%;
+    /* 5% + 2% inset */
+    margin-bottom: 30px;
+}
+
+/* Neutral Plus Index Style */
+.project-list-neutral {
+    padding: 80px 0 0 0;
+    /* No padding here to allow full-bleed children */
+    text-align: left;
+}
+
+.project-entry-neutral {
+    display: block;
+    margin: 0 0 5px 0;
+    width: 100%;
+    max-width: none;
+    text-align: left;
+    white-space: normal;
+}
+
+.project-head-neutral {
+    display: inline-block;
+    max-width: calc(100vw - 10px);
+    cursor: pointer;
+    text-align: left;
+    margin-left: 8px;
+    /* Margin matches the divider width to align the box edge */
+}
+
+.project-title-neutral {
+    display: inline;
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-size: clamp(14px, 4vw, 55px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    color: #1A1A1A;
+    --title-rule-color: #1A1A1A;
+    /* Correct underlines and dot visible by default */
+    text-transform: none;
+    padding: 0 1px;
+    /* Minimal internal padding as requested */
+    border-bottom: 1px solid var(--title-rule-color);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+.brand-prefix {
+    color: #d3d3d8;
+    /* red colour */
+}
+
+.project-title-neutral::after {
+    content: "  ●";
+    display: inline;
+    font-size: 0.8em;
+    line-height: 1;
+    color: var(--title-rule-color);
+    transition: color 0.2s ease;
+}
+
+.project-bar-neutral {
+    display: none;
+}
+
+.project-head-neutral:hover .project-title-neutral,
+.project-entry-neutral.is-expanded .project-title-neutral {
+    background-color: #d2d2d7;
+    color: white;
+    /* Use black text on the new highlight color */
+    --title-rule-color: #d2d2d7;
+}
+
+.project-head-neutral:hover .brand-prefix,
+.project-entry-neutral.is-expanded .brand-prefix {
+    color: #494749;
+}
+
+.project-head-neutral:hover .project-title-neutral::after,
+.project-entry-neutral.is-expanded .project-title-neutral::after {
+    color: white;
+}
+
+.project-head-neutral:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Staggered Indentation */
+.offset-0 {
+    margin-left: 0;
+}
+
+.offset-40 {
+    margin-left: 0;
+}
+
+.offset-80 {
+    margin-left: 0;
+}
+
+/* Projects Section */
+.projects-section {
+    margin-top: 0;
+}
+
+.projects-section .project-head-neutral {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Neutral.plus–style expandable project panel (full bleed, yellow) */
+.project-detail-neutral {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%) !important;
+    position: relative;
+    box-sizing: border-box;
+    background-color: #d2d2d7;
+    color: #000000;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-bottom: 0;
+    /* Fix: removed padding to prevent "purple lines" when closed */
+}
+
+.project-detail-neutral-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 8px;
+    /* Correct place for bottom lavender margin */
+}
+
+/* 11-Column Hard-Grid System */
+/* Grid: 8px | 1fr | 1fr | 1fr | 1fr | 8px | 1fr | 1fr | 1fr | 1fr | 8px */
+.neutral-project-grid {
+    display: grid;
+    grid-template-columns: 8px repeat(4, minmax(0, 1fr)) 8px repeat(4, minmax(0, 1fr)) 8px;
+    width: 100%;
+}
+
+/* Header Cells (Row 1) */
+.neutral-header-cell {
+    padding: 20px;
+    /* 20px padding all around as requested */
+    padding-left: 30px;
+    grid-row: 1;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: none;
+    white-space: nowrap;
+    /* Prevent skills from line-wrapping */
+}
+
+/* Content Row (Row 2) */
+.neutral-divider-wrap {
+    position: relative;
+    height: 100%;
+    /* This container determines the height of the divider */
+}
+
+.neutral-divider-wrap::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    /* Aligns with the 8px grid column */
+    top: 0px;
+    bottom: 0px;
+    width: 8px;
+    background-color: #ffffff;
+}
+
+/* For the far right divider */
+.neutral-divider-wrap.has-right::after {
+    content: '';
+    position: absolute;
+    right: -28px;
+    top: 0px;
+    bottom: 0px;
+    width: 8px;
+    background-color: #ffffff;
+}
+
+.neutral-content-cell {
+    padding: 0 20px;
+    grid-row: 2;
+}
+
+.neutral-body-text p {
+    margin: 0;
+    /* Exactly paragraph line spacing between blocks */
+}
+
+.neutral-body-text .indent-para {
+    text-indent: 1.5em;
+    font-weight: 400;
+    /* Traditional left indent for paragraphs */
+}
+
+/* Media Grid - 4 dividers (yellow) and 3 columns (white) */
+.neutral-media-grid-container {
+    display: grid;
+    grid-template-columns: 8px minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr) 8px;
+    width: 100%;
+    margin-top: 2px;
+    /* 2px spacing between content and media */
+    background-color: #d2d2d7;
+}
+
+.m-v-divider {
+    background-color: #d2d2d7;
+    grid-row: 1;
+}
+
+.m-v-1 {
+    grid-column: 1;
+}
+
+.m-v-2 {
+    grid-column: 3;
+}
+
+.m-v-3 {
+    grid-column: 5;
+}
+
+.m-v-4 {
+    grid-column: 7;
+}
+
+.neutral-media-tile {
+    background-color: #ffffff;
+    min-height: 0;
+    height: auto;
+    align-self: start;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* Typography & Details */
+.neutral-project-title {
+    font-size: 34px;
+    /* Reduced specific font size */
+    font-weight: 400;
+    /* Normal weight */
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    text-transform: none;
+    margin: 0;
+}
+
+.neutral-body-text {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #000000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .neutral-project-grid {
+        grid-template-columns: 8px 1fr 8px;
+    }
+
+    .neutral-header-cell {
+        grid-column: 2 !important;
+        grid-row: auto;
+    }
+
+    .neutral-v-divider {
+        grid-row: span 10;
+    }
+
+    .neutral-content-cell {
+        grid-column: 2 !important;
+        grid-row: auto;
+    }
+
+    .v-divider-middle {
+        display: none;
+    }
+
+    .neutral-media-grid-container {
+        grid-template-columns: 8px 1fr 8px;
+    }
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-item {
+    border-bottom: 1px solid transparent;
+    /* Optional divider placeholder */
+}
+
+.project-row {
+    width: 100vw;
+    padding: 10px 5%;
+    /* Tight vertical padding */
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.project-item.expanded .project-row {
+    background-color: var(--highlight-color);
+}
+
+.project-row:hover {
+    background-color: #d2d2d7;
+}
+
+.project-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: black;
+    text-transform: lowercase;
+}
+
+/* Project Details Section */
+.project-detail {
+    background-color: var(--highlight-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    width: 100vw;
+}
+
+.detail-inner {
+    padding: 20px 0 60px 0;
+}
+
+/* Info Bar */
+.info-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 12px 5%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-bottom: 50px;
+}
+
+.info-item .label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: black;
+    margin-bottom: 4px;
+}
+
+.info-item .value {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+
+/* Content Split */
+.detail-content {
+    display: flex;
+    padding: 0 5%;
+    gap: 80px;
+}
+
+.content-left {
+    flex: 0 0 40%;
+}
+
+.content-right {
+    flex: 0 0 60%;
+}
+
+.impact-statement {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.project-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: black;
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.project-links {
+    margin-top: 40px;
+}
+
+.project-link {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+}
+
+.project-link:hover {
+    color: white;
+    /* Contrast against yellow */
+}
+
+/* Home Page: Random Gallery */
+.home-page .layout {
+    padding: 0;
+    overflow: hidden;
+    /* Crop overflow */
+}
+
+.gallery-bleed {
+    display: flex;
+    flex-direction: row;
+    /* Grow to the right */
+    align-items: flex-end;
+    /* Align older items to the bottom */
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--bg-color);
+    overflow: hidden;
+    /* Crop overflow */
+}
+
+.gallery-item {
+    height: 100vh;
+    /* Default height */
+    width: auto;
+    overflow: hidden;
+    position: relative;
+    border: none;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item.old {
+    height: 40vh;
+    /* Shrunk size for previous items */
+}
+
+.gallery-item img,
+.gallery-item video {
+    height: 100%;
+    width: auto;
+    display: block;
+}
+
+/* About Page Redesign (Heerz Tooya style) */
+.about-page {
+    background-color: #ffffff !important;
+    color: black;
+    /* Hide scrollbar while keeping functionality */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.about-page::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+.video-hover-tile video {
+    width: 100%;
+    display: block;
+    pointer-events: none;
+    /* keeps link clickable */
+}
+
+.project-video-hover {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.project-video-hover video {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+#bg-video,
+#bg-image {
+    display: none;
+}
+
+.about-page .boxed-nav .nav-box {
+    background-color: white !important;
+    border-color: black;
+    color: black;
+}
+
+.about-page .boxed-nav .nav-box:hover {
+    border-color: #fe002c;
+    color: #fe002c;
+}
+
+/* Container for minimalist about layout */
+.about-container {
+    padding: 80px 20px 100px 20px;
+    /* 80px top = 60px nav + 20px gap. 28px side margin matches Projects content */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* spacing between blocks */
+}
+
+.about-section {
+    font-size: clamp(14px, 4vw, 24px);
+    /* Large, responsive typography */
+    font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    max-width: none;
+    text-align: justify;
+}
+
+.about-section p {
+    padding: 0px 100px 0px 100px;
+    font-size: clamp(14px, 4vw, 23px);
+    font-weight: 400;
+}
+
+.about-sectionIndent {
+    font-size: clamp(14px, 4vw, 23px);
+    font-weight: 300;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    text-indent: 1.5em;
+    /* Significant indent after first paragraph */
+    text-align: left;
+}
+
+.about-contact {
+    font-size: clamp(14px, 4vw, 20px);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: 0;
+    /* Margin handled by parent wrapper */
+}
+
+.about-contact a:hover {
+    color: #fe002c;
+}
+
+/* Row-based layout for contact and bleeding media */
+.contact-media-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Aligns contact info at the top, directly below the text */
+    margin-top: 0;
+    gap: 10px;
+    width: 100%;
+}
+
+.about-media-bleed {
+    flex: 0 0 70%;
+    /* Expanded width to be closer to contact text */
+    aspect-ratio: 4 / 3;
+    margin-right: -28px;
+    /* Bleeds out of the 28px container padding to reach screen edge */
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.about-media-bleed video,
+.about-media-bleed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-page .urdu-name-img {
+    filter: none;
+}
+
+/* Modular Franzen Layout */
+#franzen-layout {
+    position: absolute;
+    top: 0;
+    /* Start from the very top */
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Full viewport height */
+    overflow-y: auto;
+    /* Allow the layout to scroll internally */
+    overflow-x: hidden;
+    z-index: 10;
+    /* Lower than nav-box which is 2000 */
+    padding-top: 60px;
+    /* Start blocks below the nav initially */
+    padding-bottom: 0px;
+    /* No extra scrolling room at the bottom */
+}
+
+/* Removed redundant local selection styles to favor global red highlight */
+
+.f-row-1 {
+    display: flex;
+    align-items: flex-end;
+    /* Align the bottoms of yellow and magenta */
+    width: 100%;
+}
+
+.f-window {
+    position: relative;
+    /* Changed from absolute to prevent overlaps */
+    border: 1.5px solid black;
+    border-radius: 8px;
+    /* lil rounded corners */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+    height: fit-content;
+    /* Grow infinitely to fit content */
+}
+
+/* Hide scrollbars for cleaner look */
+#franzen-layout::-webkit-scrollbar,
+.f-window::-webkit-scrollbar {
+    display: none;
+}
+
+#franzen-layout,
+.f-window {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.f-window-close {
+    position: absolute;
+    top: -1.5px;
+    right: -1.5px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 1.5px solid black;
+    border-radius: 8px;
+    /* Round edges like the blocks */
+    cursor: pointer;
+    font-weight: normal;
+    /* Normal weight for 'x' */
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    display: flex;
+    /* Center x perfectly */
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 20;
+    transition: background-color 0.2s ease;
+}
+
+.f-window-close:hover {
+    background: #f0f0f0;
+}
+
+.f-content {
+    font-size: clamp(20px, 2.5vw, 36px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 30px 10px 10px 10px;
+    /* 10px margin left/right as requested */
+    color: black;
+}
+
+.f-red .f-content {
+    font-size: clamp(16px, 1.8vw, 24px);
+    /* Smaller text for red block */
+}
+
+.f-contact {
+    font-size: clamp(16px, 1.8vw, 24px);
+    line-height: 1.3;
+}
+
+.f-contact a {
+    color: black;
+    text-decoration: none;
+}
+
+.f-contact a:hover {
+    text-decoration: underline;
+}
+
+.f-image-wrapper {
+    margin: 30px 0 0 0;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+    .profile-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .bottom-right {
+        position: relative;
+        text-align: right;
+        padding: 20px 5%;
+        top: auto;
+        right: auto;
+        bottom: auto;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .gallery-bleed {
+        flex-flow: row wrap;
+        /* Stack horizontally on mobile */
+        height: auto;
+    }
+
+    .gallery-item {
+        width: 100vw;
+        height: 50vh;
+        flex: 0 0 50vh;
+    }
+}
+
+/* --- Showcase Page (Varvara Godovikova Replica) --- */
+.showcase-page {
+    background-color: #ffffff !important;
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: default;
+}
+
+.showcase-nav {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.showcase-nav-top {
+    top: 20px;
+    left: 20px;
+}
+
+.showcase-nav-top .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.showcase-nav-top a {
+    color: #000;
+    text-decoration: none;
+}
+
+.showcase-container {
+    padding: 100px 20px 100px 20px;
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.showcase-bio {
+    width: 280px;
+    margin-bottom: 80px;
+}
+
+.showcase-bio p {
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+}
+
+.showcase-bio .social-links a {
+    display: block;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.showcase-grid {
+    position: relative;
+    width: 100%;
+    min-height: 800px;
+}
+
+.showcase-bg-text {
+    position: absolute;
+    top: -50px;
+    left: 200px;
+    width: 700px;
+    opacity: 1;
+    z-index: 1;
+}
+
+.graphic-bg-img {
+    width: 100%;
+    height: auto;
+}
+
+.showcase-project-module {
+    position: relative;
+    width: fit-content;
+    z-index: 10;
+    margin-bottom: 120px;
+}
+
+.revolution-module {
+    margin-left: 500px;
+    margin-top: -100px;
+}
+
+.project-img {
+    max-width: 700px;
+    height: auto;
+    display: block;
+}
+
+.project-meta {
+    margin-top: 15px;
+}
+
+.meta-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.meta-sub {
+    font-size: 12px;
+    color: #000;
+    opacity: 0.8;
+}
+
+/* Annotation Logic */
+.showcase-annotation {
+    position: absolute;
+    top: 250px;
+    left: 1000px;
+    z-index: 20;
+}
+
+.red-circle {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #FF0000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.annotation-line {
+    width: 200px;
+    height: 100px;
+    border-left: 2px solid #FF0000;
+    border-bottom: 2px solid #FF0000;
+    margin-left: 30px;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    transform: rotate(-15deg);
+}
+
+.annotation-text {
+    position: absolute;
+    top: 120px;
+    left: 250px;
+    font-size: 12px;
+    color: #FF0000;
+    line-height: 1.2;
+}
+
+/* Footer Nav */
+.showcase-nav-bottom {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: calc(100% - 40px);
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contact-links a {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    margin-bottom: 3px;
+}
+
+.go-up {
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.buy-link {
+    background: #7F7F7F;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* --- Varvara-Inspired About Layout --- */
+.about-top-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* text wider, video smaller */
+    gap: 60px;
+    margin-bottom: 100px;
+    align-items: start;
+}
+
+.about-bio-col p {
+    font-size: 23px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    padding: 0 !important;    /* Override previous container padding */
+}
+/* --- About Page Video Overhaul --- */
+
+.about-video-block {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 2px solid black;
+    background-color: #000;
+    cursor: pointer;
+}
+
+.about-video-block video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Removed rotation to allow standard 4:3 landscape crop from 16:9 source */
+}
+
+/* --- About Page Interaction Modes --- */
+.about-page {
+    transition: color 0.3s ease;
+}
+
+/* Moodboard Collage */
+.moodboard-section {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.moodboard-header {
+    font-size: clamp(18px, 3vw, 24px);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.moodboard-grid {
+    column-count: 3;
+    column-gap: 15px;
+    width: 100%;
+}
+
+.moodboard-item {
+    break-inside: avoid;
+    margin-bottom: 15px;
+    position: relative;
+    background: #f9f9f9;
+}
+
+.own-mark {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.mb-short {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.moodboard-item img,
+.moodboard-item video {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(0%);
+    transition: filter 0.3s ease, transform 0.5s ease;
+}
+
+.mb-small {
+    padding: 30px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.mb-small img,
+.mb-small video {
+    width: 60% !important;
+    /* Force resize within masonry column */
+    max-width: 250px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Grid helper classes removed */
+
+@media (max-width: 1100px) {
+    .about-container {
+        padding: 100px 20px;
+    }
+
+    .about-top-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .about-video-block {
+        grid-column: span 2;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-top-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .moodboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Adjusting layout for Projects Page specifically */
+.projects-page .projects-section {
+    padding: 20px 0 0 0;
+    /* Flush with edge, padding inside title will match divider */
+}
+
+.projects-page .layout {
+    padding-left: 0;
+    padding-top: 100px;
+}
+
+@media (max-width: 900px) {
+    .projects-page .projects-section {
+        padding-left: 0px;
+        /* Standard padding on mobile */
+    }
+
+    .fixed-element.bottom-left {
+        position: relative !important;
+        margin-top: 40px;
+        left: 0;
+        bottom: 0;
+        padding: 0 20px;
+    }
+}
+
+/* --- Moodboard Lightbox Viewer --- */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 5000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img,
+.lightbox-content video {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    margin-bottom: 20px;
+    display: none;
+    /* Controlled by JS */
+}
+
+.lightbox-caption {
+    text-align: center;
+    font-family: var(--font-inter);
+    color: #000;
+    width: 100%;
+}
+
+.lightbox-caption .artist {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.lightbox-caption .title {
+    font-style: italic;
+    font-size: 13px;
+    display: block;
+}
+
+.lightbox-caption .meta {
+    font-size: 12px;
+    opacity: 0.7;
+    display: block;
+    margin-top: 4px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 35px;
+    /* The X is usually slightly smaller than arrows */
+    cursor: pointer;
+    z-index: 5100;
+    line-height: 1;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.nav-arrow {
+    background: none;
+    border: none;
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.2s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    font-size: 45px;
+}
+
+@media (max-width: 900px) {
+    .moodboard-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .moodboard-grid {
+        column-count: 1;
+    }
+}
