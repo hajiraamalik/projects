@@ -254,20 +254,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const hajiraBtn = document.getElementById('hajira-btn');
 
         const mediaPool = [
-            { type: 'image', path: 'images/factor_ij.jpg' },
-            { type: 'image', path: 'images/gevleugelde.jpg' },
-            { type: 'image', path: 'images/idfa_vr.jpg' },
-            { type: 'image', path: 'images/uni_image.png' },
-            { type: 'video', path: 'images/Ik ben nog niet weg.mp4' },
-            { type: 'video', path: 'images/banner.mp4' },
-            { type: 'video', path: 'images/trailer_ikben.mp4' }
+            { type: 'image', path: 'images/IJ_1.png' },
+            { type: 'image', path: 'images/IJ_2.png' },
+            { type: 'image', path: 'images/IJ_3.png' },
+            { type: 'image', path: 'images/IJ_4.png' },
+            { type: 'image', path: 'images/IJ_5.png' },
+            { type: 'image', path: 'images/thesis.png' },
+            { type: 'video', path: 'images/aimee.MP4' },
+            { type: 'video', path: 'images/trend.MP4' }
         ];
 
-        // Ensure the FIRST item is always the same (e.g., factor_ij.jpg)
+        if (!gallery || !hajiraBtn) {
+            return;
+        }
+
+        // Ensure the FIRST item is always the same (e.g., IJ_1.png)
         const initialItem = mediaPool[0];
 
         function addItem(item, isNew = true) {
-            // If adding a NEW item, shrink all current ones
             if (isNew) {
                 const currentItems = gallery.querySelectorAll('.gallery-item');
                 currentItems.forEach(el => el.classList.add('old'));
@@ -275,12 +279,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const div = document.createElement('div');
             div.className = 'gallery-item';
-            // New items are full height by default (no 'old' class)
 
             if (item.type === 'image') {
                 const img = document.createElement('img');
                 img.src = item.path;
-                img.alt = "Hajira Portfolio Media";
+                img.alt = 'Hajira Portfolio Media';
                 div.appendChild(img);
             } else {
                 const video = document.createElement('video');
@@ -292,7 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(video);
             }
 
-            // Prepend so newest is on the left
             if (gallery.firstChild) {
                 gallery.insertBefore(div, gallery.firstChild);
             } else {
@@ -306,11 +308,8 @@ document.addEventListener('DOMContentLoaded', () => {
             addItem(item, true);
         }
 
-        // Initial Load (Always start with the same first picture)
-        // Set isNew to false for the very first item so it starts full height
         addItem(initialItem, false);
 
-        // Click Logic: Prepend new items, shrink others
         hajiraBtn.addEventListener('click', (e) => {
             e.preventDefault();
             addRandomItem();
