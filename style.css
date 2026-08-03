@@ -1545,20 +1545,40 @@ a {
 
 .about-index {
     position: fixed;
-    top: 250px;
-    left: 44px;
+    top: 180px;
+    left: 24px;
     z-index: 1500;
     display: flex;
-    flex-direction: column;
     align-items: flex-start;
+    gap: 48px;
     text-align: left;
-    max-width: min(360px, 32vw);
+    max-width: min(760px, 86vw);
 }
 
 .about-page.panel-open .about-index {
-    top: 250px;
-    left: 44px;
-    max-width: min(360px, 32vw);
+    top: 180px;
+    left: 24px;
+    max-width: min(760px, 86vw);
+}
+
+.about-index-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-index-projects {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+    margin-top: 0;
+}
+
+.about-index-projects.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .index-item {
@@ -1583,32 +1603,27 @@ a {
     font-size: clamp(42px, 6vw, 72px);
     font-weight: 500;
     letter-spacing: -0.03em;
-    margin-bottom: 0.35em;
+    margin-bottom: 0.25em;
 }
 
 .index-h2 {
     font-size: clamp(22px, 3vw, 36px);
     font-weight: 500;
     letter-spacing: -0.02em;
-    margin-top: 0.55em;
-}
-
-.index-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    margin-top: 0.35em;
 }
 
 .index-project-list {
     list-style: none;
-    margin: 0.35em 0 0 0;
-    padding: 0 0 0 1.25em;
-    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
 }
 
 .index-project-list li {
-    margin: 0.15em 0;
+    margin: 0;
 }
 
 .index-project-name {
@@ -1630,7 +1645,6 @@ a {
     color: #000000;
 }
 
-/* Page Open state: opened item is RED accent, unselected items are BLACK with NO BLUR */
 .about-page.panel-open .index-item.is-selected,
 .about-page.panel-open .index-project-name.is-selected {
     color: var(--about-red) !important;
@@ -1645,16 +1659,16 @@ a {
     opacity: 1;
 }
 
-/* Hover state: Blurring ONLY occurs when hovering over an index item */
 .about-index.is-hovering .index-item:not(.is-hovered),
-.about-index.is-hovering .index-project-name:not(.is-hovered) {
+.about-index.is-hovering .index-project-name:not(.is-hovered):not(.is-projects-hover) {
     color: #000000;
-    filter: blur(2.5px);
+    filter: blur(2.35px);
     opacity: 0.45;
 }
 
 .about-index.is-hovering .index-item.is-hovered,
-.about-index.is-hovering .index-project-name.is-hovered {
+.about-index.is-hovering .index-project-name.is-hovered,
+.about-index.is-hovering .index-project-name.is-projects-hover {
     color: var(--about-red) !important;
     filter: none !important;
     opacity: 1 !important;
@@ -1792,13 +1806,21 @@ a {
 }
 
 /* Project panels inside detail view — same styling as projects page */
+.about-detail-panel .project-detail-neutral {
+    background: transparent !important;
+    margin-left: 0 !important;
+    max-width: none;
+}
+
 .about-detail-panel .project-detail-neutral-inner {
     padding: 0;
+    background: transparent !important;
 }
 
 .about-detail-panel .neutral-project-grid,
 .about-detail-panel .neutral-media-grid-container {
     width: 100%;
+    background: transparent;
 }
 
 .about-detail-panel .project-panel-header {

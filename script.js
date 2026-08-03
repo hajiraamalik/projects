@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const detailPanel = document.getElementById('about-detail-panel');
         const detailClose = document.getElementById('detail-panel-close');
         const projectListEl = document.getElementById('index-project-list');
+        const projectListColumn = document.getElementById('about-index-projects');
         const projectPanelsContainer = document.getElementById('project-panels-container');
-        const projectsGroup = aboutIndex?.querySelector('[data-group="projects"]');
 
         let projectData = [];
         let activePanel = null;
@@ -57,9 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
             clearHoverClasses();
             target.classList.add('is-hovered');
 
-            // If hovering projects header, also highlight first project or projects header
             if (target.dataset.panel === 'projects') {
-                projectsGroup?.classList.add('is-projects-hover');
+                projectListColumn?.classList.add('is-visible');
+                projectListEl?.querySelectorAll('.index-project-name').forEach(el => {
+                    el.classList.add('is-projects-hover');
+                });
+            } else if (target.classList.contains('index-project-name')) {
+                projectListColumn?.classList.add('is-visible');
+                target.classList.add('is-projects-hover');
+                projectListEl?.querySelectorAll('.index-project-name').forEach(el => {
+                    if (el !== target) {
+                        el.classList.remove('is-projects-hover');
+                    }
+                });
+            } else {
+                projectListColumn?.classList.remove('is-visible');
             }
         }
 
@@ -223,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoverTarget = null;
                 aboutIndex.classList.remove('is-hovering');
                 clearHoverClasses();
+                projectListColumn?.classList.remove('is-visible');
                 if (!activePanel) {
                     document.body.classList.remove('is-interacting');
                 }
@@ -240,7 +253,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (sectionBtn) {
                     e.preventDefault();
                     if (sectionBtn.dataset.panel === 'projects') {
-                        openPanel(null, 0); // Open first project when projects is clicked
+                        document.body.classList.add('is-interacting');
+                        projectListColumn?.classList.add('is-visible');
+                        clearHoverClasses();
+                        sectionBtn.classList.add('is-hovered');
+                        aboutIndex?.classList.add('is-hovering');
+                        closePanel();
                     } else {
                         openPanel(sectionBtn.dataset.panel);
                     }
