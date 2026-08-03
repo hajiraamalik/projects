@@ -58,42 +58,45 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function openPanel(panelId, projectIndex = null) {
+            projectListColumn?.classList.remove('is-visible');
+            aboutIndex?.classList.remove('is-hovering');
+            clearHoverClasses();
             document.body.classList.add('panel-open', 'is-interacting');
             detailPanel.classList.add('is-open');
-            aboutIndex?.classList.remove('is-hovering');
             detailPanel.setAttribute('aria-hidden', 'false');
 
             document.querySelectorAll('.detail-panel-content').forEach(panel => {
                 panel.hidden = true;
             });
 
-            clearHoverClasses();
             document.querySelectorAll('.index-item, .index-project-name').forEach(el => {
                 el.classList.remove('is-selected');
             });
 
-            if (projectIndex !== null) {
-                const projectPanel = document.querySelector(`.detail-panel-content[data-project-index="${projectIndex}"]`);
-                const projectBtn = document.querySelector(`.index-project-name[data-project-index="${projectIndex}"]`);
-                if (projectPanel) {
-                    projectPanel.hidden = false;
-                    activePanel = `project-${projectIndex}`;
+            setTimeout(() => {
+                if (projectIndex !== null) {
+                    const projectPanel = document.querySelector(`.detail-panel-content[data-project-index="${projectIndex}"]`);
+                    const projectBtn = document.querySelector(`.index-project-name[data-project-index="${projectIndex}"]`);
+                    if (projectPanel) {
+                        projectPanel.hidden = false;
+                        activePanel = `project-${projectIndex}`;
+                    }
+                    if (projectBtn) projectBtn.classList.add('is-selected');
+                    const mainProjBtn = document.querySelector('.index-item[data-panel="projects"]');
+                    if (mainProjBtn) mainProjBtn.classList.add('is-selected');
+                } else {
+                    const panel = document.querySelector(`.detail-panel-content[data-panel="${panelId}"]`);
+                    const navBtn = document.querySelector(`.index-item[data-panel="${panelId}"]`);
+                    if (panel) {
+                        panel.hidden = false;
+                        activePanel = panelId;
+                    }
+                    if (navBtn) navBtn.classList.add('is-selected');
                 }
-                if (projectBtn) projectBtn.classList.add('is-selected');
-                const mainProjBtn = document.querySelector('.index-item[data-panel="projects"]');
-                if (mainProjBtn) mainProjBtn.classList.add('is-selected');
-            } else {
-                const panel = document.querySelector(`.detail-panel-content[data-panel="${panelId}"]`);
-                const navBtn = document.querySelector(`.index-item[data-panel="${panelId}"]`);
-                if (panel) {
-                    panel.hidden = false;
-                    activePanel = panelId;
-                }
-                if (navBtn) navBtn.classList.add('is-selected');
-            }
 
-            initPanelVideos();
-            resetIdleTimer();
+                initPanelVideos();
+                resetIdleTimer();
+            }, 120);
         }
 
         function closePanel() {
@@ -231,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const projectBtn = e.target.closest('.index-project-name');
                 if (projectBtn) {
                     e.preventDefault();
+                    projectListColumn?.classList.remove('is-visible');
                     openPanel(null, parseInt(projectBtn.dataset.projectIndex, 10));
                     return;
                 }
