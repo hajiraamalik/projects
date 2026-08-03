@@ -1521,11 +1521,6 @@ a {
     background-color: #ffffff !important;
 }
 
-.about-page.panel-open .about-index {
-    opacity: 0;
-    transform: translateX(-6px);
-}
-
 .about-page:not(.is-interacting) .english-name {
     color: #ffffff;
 }
