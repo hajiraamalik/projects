@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let activePanel = null;
         let hoverTarget = null;
         let idleTimer = null;
-        const IDLE_TIMEOUT_MS = 30000; // 30 seconds idle redirect
+        const IDLE_TIMEOUT_MS = 30000;
 
         function resetIdleTimer() {
             clearTimeout(idleTimer);
@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function openPanel(panelId, projectIndex = null) {
             document.body.classList.add('panel-open', 'is-interacting');
             detailPanel.classList.add('is-open');
+            aboutIndex?.classList.remove('is-hovering');
             detailPanel.setAttribute('aria-hidden', 'false');
 
             document.querySelectorAll('.detail-panel-content').forEach(panel => {
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!hoverTarget) {
                 document.body.classList.remove('is-interacting');
             }
+            aboutIndex?.classList.remove('is-hovering');
             detailPanel.classList.remove('is-open');
             detailPanel.setAttribute('aria-hidden', 'true');
             document.querySelectorAll('.detail-panel-content').forEach(panel => {
@@ -152,6 +154,29 @@ document.addEventListener('DOMContentLoaded', () => {
             panel.style.setProperty('--highlight-color', randColor);
         }
 
+        const seededProjects = [
+            {
+                fullTitle: 'Factor IJ — A Lot of coffee and art',
+                shortTitle: 'Factor IJ',
+                html: `<div class="project-detail-neutral-inner"><p>Research & strategy, exhibition communication, and campaign work for Factor IJ in Amsterdam-IJburg.</p></div>`
+            },
+            {
+                fullTitle: 'The Findlings — Blue bottle caps are gone from the streets',
+                shortTitle: 'The Findlings',
+                html: `<div class="project-detail-neutral-inner"><p>Campaign strategy and exhibition communication for a project turning waste into urban creatures and prompts for looking closer.</p></div>`
+            },
+            {
+                fullTitle: 'Thesis — Testing VR as a tool for outgroup humanization',
+                shortTitle: 'Thesis',
+                html: `<div class="project-detail-neutral-inner"><p>Research on immersive media and how VR shapes emotional engagement and perspective-taking.</p></div>`
+            },
+            {
+                fullTitle: 'TrendWatching — Amplify your edge',
+                shortTitle: 'TrendWatching',
+                html: `<div class="project-detail-neutral-inner"><p>Strategic foresight and onboarding work focused on helping users understand a dense platform quickly.</p></div>`
+            }
+        ];
+
         async function loadProjects() {
             try {
                 const response = await fetch('index.html');
@@ -172,40 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderProjectItem(fullTitle, shortTitle, index, detailInner.outerHTML);
                 });
             } catch (err) {
-                console.warn('Loading fallback projects for local/CORS compatibility:', err);
-                const fallbackProjects = [
-                    {
-                        fullTitle: 'Factor IJ — Reversing the pinterest logic for an art-rental',
-                        shortTitle: 'Factor IJ',
-                        html: `<div class="project-detail-neutral-inner"><p>Reversing the pinterest logic for an art-rental platform and gallery in Amsterdam.</p></div>`
-                    },
-                    {
-                        fullTitle: 'The Findlings — After tethered bottle caps became mandatory...',
-                        shortTitle: 'The Findlings',
-                        html: `<div class="project-detail-neutral-inner"><p>After tethered bottle caps became mandatory in Europe, loose caps disappeared. An investigation into urban artifacts.</p></div>`
-                    },
-                    {
-                        fullTitle: 'Thesis — Testing VR as a tool for outgroup humanization',
-                        shortTitle: 'Thesis',
-                        html: `<div class="project-detail-neutral-inner"><p>Testing virtual reality simulations to measure changes in perspective-taking and empathy towards outgroups.</p></div>`
-                    },
-                    {
-                        fullTitle: 'TrendWatching — Amplify your edge',
-                        shortTitle: 'TrendWatching',
-                        html: `<div class="project-detail-neutral-inner"><p>Consumer trends and strategic foresight analysis for modern brand positioning.</p></div>`
-                    },
-                    {
-                        fullTitle: 'Greenwashing in organisations',
-                        shortTitle: 'Greenwashing in organisations',
-                        html: `<div class="project-detail-neutral-inner"><p>Empirical study analyzing corporate environmental framing and public skepticism.</p></div>`
-                    },
-                    {
-                        fullTitle: 'Take it to the web — Afghan girls education right',
-                        shortTitle: 'Take it to the web',
-                        html: `<div class="project-detail-neutral-inner"><p>Digital advocacy project supporting educational access for girls in Afghanistan.</p></div>`
-                    }
-                ];
-                fallbackProjects.forEach((proj, idx) => {
+                console.warn('Loading seeded projects for local/CORS compatibility:', err);
+                seededProjects.forEach((proj, idx) => {
                     renderProjectItem(proj.fullTitle, proj.shortTitle, idx, proj.html);
                 });
             }
