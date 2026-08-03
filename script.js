@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.index-item, .index-project-name').forEach(el => {
                 el.classList.remove('is-hovered');
             });
-            aboutIndex?.classList.remove('is-hovering');
         }
 
         function setHoverState(target) {
@@ -210,7 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = e.target.closest('.index-item, .index-project-name');
                 if (target && aboutIndex.contains(target)) {
                     hoverTarget = target;
-                    setHoverState(target);
+                    if (!target.classList.contains('is-hovered')) {
+                        clearHoverClasses();
+                        target.classList.add('is-hovered');
+                        aboutIndex.classList.add('is-hovering');
+                        document.body.classList.add('is-interacting');
+                    }
                 }
             });
 
