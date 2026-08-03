@@ -1568,17 +1568,12 @@ a {
 }
 
 .about-index-projects {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.18s ease;
+    display: none;
     margin-top: 0;
 }
 
 .about-index-projects.is-visible {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+    display: flex;
 }
 
 .index-item {
@@ -1660,15 +1655,14 @@ a {
 }
 
 .about-index.is-hovering .index-item:not(.is-hovered),
-.about-index.is-hovering .index-project-name:not(.is-hovered):not(.is-projects-hover) {
+.about-index.is-hovering .index-project-name:not(.is-hovered) {
     color: #000000;
     filter: blur(2.35px);
     opacity: 0.45;
 }
 
 .about-index.is-hovering .index-item.is-hovered,
-.about-index.is-hovering .index-project-name.is-hovered,
-.about-index.is-hovering .index-project-name.is-projects-hover {
+.about-index.is-hovering .index-project-name.is-hovered {
     color: var(--about-red) !important;
     filter: none !important;
     opacity: 1 !important;

@@ -56,23 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutIndex?.classList.add('is-hovering');
             clearHoverClasses();
             target.classList.add('is-hovered');
-
-            if (target.dataset.panel === 'projects') {
-                projectListColumn?.classList.add('is-visible');
-                projectListEl?.querySelectorAll('.index-project-name').forEach(el => {
-                    el.classList.add('is-projects-hover');
-                });
-            } else if (target.classList.contains('index-project-name')) {
-                projectListColumn?.classList.add('is-visible');
-                target.classList.add('is-projects-hover');
-                projectListEl?.querySelectorAll('.index-project-name').forEach(el => {
-                    if (el !== target) {
-                        el.classList.remove('is-projects-hover');
-                    }
-                });
-            } else {
-                projectListColumn?.classList.remove('is-visible');
-            }
         }
 
         function openPanel(panelId, projectIndex = null) {
@@ -235,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hoverTarget = null;
                 aboutIndex.classList.remove('is-hovering');
                 clearHoverClasses();
-                projectListColumn?.classList.remove('is-visible');
                 if (!activePanel) {
                     document.body.classList.remove('is-interacting');
                 }
@@ -260,6 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         aboutIndex?.classList.add('is-hovering');
                         closePanel();
                     } else {
+                        projectListColumn?.classList.remove('is-visible');
                         openPanel(sectionBtn.dataset.panel);
                     }
                 }
