@@ -1521,6 +1521,11 @@ a {
     background-color: #ffffff !important;
 }
 
+.about-page.panel-open .about-index {
+    opacity: 0;
+    transform: translateX(-6px);
+}
+
 .about-page:not(.is-interacting) .english-name {
     color: #ffffff;
 }
@@ -1553,6 +1558,7 @@ a {
     gap: 48px;
     text-align: left;
     max-width: min(760px, 86vw);
+    transition: opacity 0.24s ease, transform 0.24s ease;
 }
 
 .about-page.panel-open .about-index {
@@ -1570,10 +1576,15 @@ a {
 .about-index-projects {
     display: none;
     margin-top: 0;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.24s ease, transform 0.24s ease;
 }
 
 .about-index-projects.is-visible {
     display: flex;
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .index-item {

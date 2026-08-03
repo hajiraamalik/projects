@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 initPanelVideos();
                 resetIdleTimer();
-            }, 120);
+            }, 220);
         }
 
         function closePanel() {
