@@ -733,20 +733,14 @@ a {
     display: block;
 }
 
-/* About Page Redesign (Heerz Tooya style) */
+/* About Page Redesign — legacy scroll hiding */
 .about-page {
-    background-color: #ffffff !important;
-    color: black;
-    /* Hide scrollbar while keeping functionality */
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
 }
 
 .about-page::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari and Opera */
 }
 
 .video-hover-tile video {
@@ -1275,7 +1269,7 @@ a {
 }
 
 /* --- About Page Interaction Modes --- */
-.about-page {
+.about-page .about-container {
     transition: color 0.3s ease;
 }
 
@@ -1517,5 +1511,350 @@ a {
 @media (max-width: 600px) {
     .moodboard-grid {
         column-count: 1;
+    }
+}
+
+/* --- About Page: Index + Detail Panel Redesign --- */
+:root {
+    --about-red: #fe002c;
+}
+
+.about-page {
+    background-color: var(--about-red) !important;
+    min-height: 100vh;
+    overflow: hidden;
+    transition: background-color 0.45s ease;
+}
+
+.about-page.is-interacting {
+    background-color: #ffffff !important;
+}
+
+.about-page:not(.is-interacting) .english-name {
+    color: #ffffff;
+}
+
+.about-page:not(.is-interacting) .english-name .pronunciation-tooltip {
+    color: #ffffff;
+}
+
+.about-page.is-interacting .english-name {
+    color: var(--about-red);
+}
+
+.about-page.is-interacting .english-name .pronunciation-tooltip {
+    color: #000000;
+}
+
+.about-layout {
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+.about-index {
+    position: fixed;
+    top: 210px;
+    left: 40px;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: min(340px, 32vw);
+}
+
+.about-page.panel-open .about-index {
+    top: 210px;
+    left: 40px;
+    max-width: min(340px, 32vw);
+}
+
+.index-item {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-family: var(--font-inter);
+    text-align: left;
+    text-transform: lowercase;
+    color: #000000;
+    transition: color 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+    line-height: 1.15;
+}
+
+.about-page.is-interacting .index-item {
+    color: #000000;
+}
+
+.index-h1 {
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.35em;
+}
+
+.index-h2 {
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-top: 0.55em;
+}
+
+.index-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.index-project-list {
+    list-style: none;
+    margin: 0.35em 0 0 0;
+    padding: 0 0 0 1.25em;
+    width: 100%;
+}
+
+.index-project-list li {
+    margin: 0.15em 0;
+}
+
+.index-project-name {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: var(--font-inter);
+    font-size: clamp(15px, 1.6vw, 20px);
+    font-weight: 400;
+    line-height: 1.45;
+    text-align: left;
+    text-transform: none;
+    color: #000000;
+    transition: color 0.2s ease, opacity 0.2s ease, filter 0.2s ease;
+}
+
+.about-page.is-interacting .index-project-name {
+    color: #000000;
+}
+
+/* Page Open state: opened item is RED accent, unselected items are BLACK with NO BLUR */
+.about-page.panel-open .index-item.is-selected,
+.about-page.panel-open .index-project-name.is-selected {
+    color: var(--about-red) !important;
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+.about-page.panel-open .index-item:not(.is-selected),
+.about-page.panel-open .index-project-name:not(.is-selected) {
+    color: #000000;
+    filter: none;
+    opacity: 1;
+}
+
+/* Hover state: Blurring ONLY occurs when hovering over an index item */
+.about-index.is-hovering .index-item:not(.is-hovered),
+.about-index.is-hovering .index-project-name:not(.is-hovered) {
+    color: #000000;
+    filter: blur(2.5px);
+    opacity: 0.45;
+}
+
+.about-index.is-hovering .index-item.is-hovered,
+.about-index.is-hovering .index-project-name.is-hovered {
+    color: var(--about-red) !important;
+    filter: none !important;
+    opacity: 1 !important;
+}
+
+.about-index-divider {
+    display: none !important;
+}
+
+.about-detail-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 1300;
+    overflow: hidden;
+}
+
+.about-detail-panel.is-open {
+    width: calc(100% - 360px);
+    left: 360px;
+    right: 0;
+}
+
+.detail-panel-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 160px 60px 80px 40px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.detail-panel-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.detail-panel-content {
+    animation: panelFadeIn 0.25s ease;
+}
+
+.detail-panel-content[hidden] {
+    display: none !important;
+}
+
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.about-detail-panel .about-top-grid {
+    margin-bottom: 40px;
+}
+
+.about-detail-panel .about-bio-col p {
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: clamp(17px, 1.9vw, 22px);
+    line-height: 1.6;
+    color: #111;
+    margin-bottom: 24px;
+}
+
+.about-portrait-placeholder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.about-portrait-img {
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: cover;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    display: block;
+}
+
+.portrait-caption {
+    font-family: var(--font-inter);
+    font-size: 13px;
+    color: #444;
+    margin-top: 12px;
+}
+
+.caption-link {
+    text-decoration: underline;
+    color: #000;
+}
+
+.about-detail-panel .moodboard-section {
+    padding-top: 0;
+}
+
+.detail-contact {
+    font-size: clamp(18px, 2vw, 26px);
+    font-weight: 400;
+    line-height: 1.7;
+}
+
+.detail-contact p {
+    margin-bottom: 0.4em;
+}
+
+.detail-contact a:hover {
+    color: var(--about-red);
+}
+
+.catalogue-placeholder {
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 400;
+    color: #666;
+    padding-top: 20px;
+}
+
+/* Project panels inside detail view — same styling as projects page */
+.about-detail-panel .project-detail-neutral-inner {
+    padding: 0;
+}
+
+.about-detail-panel .neutral-project-grid,
+.about-detail-panel .neutral-media-grid-container {
+    width: 100%;
+}
+
+.about-detail-panel .project-panel-header {
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #000;
+}
+
+.about-detail-panel .project-panel-header h2 {
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+@media (max-width: 900px) {
+    .about-index {
+        top: 200px;
+        left: 20px;
+        max-width: 40vw;
+    }
+
+    .about-page.panel-open .about-index {
+        top: 200px;
+        left: 20px;
+        max-width: 40vw;
+    }
+
+    .about-detail-panel.is-open {
+        left: 42vw;
+        width: 58vw;
+    }
+
+    .about-top-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-index {
+        position: fixed;
+        top: auto;
+        bottom: 24px;
+        left: 20px;
+        right: 20px;
+        max-width: none;
+    }
+
+    .about-page.panel-open .about-index {
+        display: none;
+    }
+
+    .about-detail-panel.is-open {
+        left: 0;
+        width: 100%;
+    }
+
+    .detail-panel-scroll {
+        padding: 120px 20px 60px 20px;
     }
 }

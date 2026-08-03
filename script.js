@@ -4,10 +4,279 @@ document.addEventListener('DOMContentLoaded', () => {
     const isAboutPage = document.body.classList.contains('about-page');
     const isHomePage = document.body.classList.contains('home-page');
     const isProjectsPage = document.querySelector('.projects-section');
+    const rgbMuted = ['#ff9999', '#ffff99', '#ff99ff', '#99ffff', '#99ff99', '#9999ff'];
 
-    // --- About Page: Video & Lightbox Logic ---
+    // --- About Page: Index, Detail Panel, Video & Lightbox ---
     if (isAboutPage) {
-        // 1. Video Play-on-Hover
+        const aboutIndex = document.getElementById('about-index');
+        const detailPanel = document.getElementById('about-detail-panel');
+        const detailClose = document.getElementById('detail-panel-close');
+        const projectListEl = document.getElementById('index-project-list');
+        const projectPanelsContainer = document.getElementById('project-panels-container');
+        const projectsGroup = aboutIndex?.querySelector('[data-group="projects"]');
+
+        let projectData = [];
+        let activePanel = null;
+        let hoverTarget = null;
+        let idleTimer = null;
+        const IDLE_TIMEOUT_MS = 30000; // 30 seconds idle redirect
+
+        function resetIdleTimer() {
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                if (isAboutPage && detailPanel?.classList.contains('is-open')) {
+                    closePanel();
+                }
+            }, IDLE_TIMEOUT_MS);
+        }
+
+        // Attach idle activity reset listeners
+        ['mousemove', 'mousedown', 'keydown', 'touchstart', 'scroll', 'wheel'].forEach(evt => {
+            window.addEventListener(evt, resetIdleTimer, { passive: true });
+        });
+        resetIdleTimer();
+
+        function clearHoverClasses() {
+            document.querySelectorAll('.index-item, .index-project-name').forEach(el => {
+                el.classList.remove('is-hovered');
+            });
+            aboutIndex?.classList.remove('is-hovering');
+        }
+
+        function setHoverState(target) {
+            if (!target) {
+                clearHoverClasses();
+                if (!detailPanel?.classList.contains('is-open')) {
+                    document.body.classList.remove('is-interacting');
+                }
+                return;
+            }
+
+            document.body.classList.add('is-interacting');
+            aboutIndex?.classList.add('is-hovering');
+            clearHoverClasses();
+            target.classList.add('is-hovered');
+
+            // If hovering projects header, also highlight first project or projects header
+            if (target.dataset.panel === 'projects') {
+                projectsGroup?.classList.add('is-projects-hover');
+            }
+        }
+
+        function openPanel(panelId, projectIndex = null) {
+            document.body.classList.add('panel-open', 'is-interacting');
+            detailPanel.classList.add('is-open');
+            detailPanel.setAttribute('aria-hidden', 'false');
+
+            document.querySelectorAll('.detail-panel-content').forEach(panel => {
+                panel.hidden = true;
+            });
+
+            clearHoverClasses();
+            document.querySelectorAll('.index-item, .index-project-name').forEach(el => {
+                el.classList.remove('is-selected');
+            });
+
+            if (projectIndex !== null) {
+                const projectPanel = document.querySelector(`.detail-panel-content[data-project-index="${projectIndex}"]`);
+                const projectBtn = document.querySelector(`.index-project-name[data-project-index="${projectIndex}"]`);
+                if (projectPanel) {
+                    projectPanel.hidden = false;
+                    activePanel = `project-${projectIndex}`;
+                }
+                if (projectBtn) projectBtn.classList.add('is-selected');
+                const mainProjBtn = document.querySelector('.index-item[data-panel="projects"]');
+                if (mainProjBtn) mainProjBtn.classList.add('is-selected');
+            } else {
+                const panel = document.querySelector(`.detail-panel-content[data-panel="${panelId}"]`);
+                const navBtn = document.querySelector(`.index-item[data-panel="${panelId}"]`);
+                if (panel) {
+                    panel.hidden = false;
+                    activePanel = panelId;
+                }
+                if (navBtn) navBtn.classList.add('is-selected');
+            }
+
+            initPanelVideos();
+            resetIdleTimer();
+        }
+
+        function closePanel() {
+            document.body.classList.remove('panel-open');
+            if (!hoverTarget) {
+                document.body.classList.remove('is-interacting');
+            }
+            detailPanel.classList.remove('is-open');
+            detailPanel.setAttribute('aria-hidden', 'true');
+            document.querySelectorAll('.detail-panel-content').forEach(panel => {
+                panel.hidden = true;
+            });
+            document.querySelectorAll('.index-item, .index-project-name').forEach(el => {
+                el.classList.remove('is-selected');
+            });
+            activePanel = null;
+        }
+
+        function initPanelVideos() {
+            detailPanel.querySelectorAll('.neutral-media-tile video, .moodboard-item video').forEach(v => {
+                v.muted = true;
+                v.preload = 'auto';
+            });
+        }
+
+        function renderProjectItem(fullTitle, shortTitle, index, innerHTML) {
+            projectData.push({ fullTitle, shortTitle, index });
+
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'index-project-name';
+            btn.textContent = shortTitle;
+            btn.dataset.projectIndex = String(index);
+            li.appendChild(btn);
+            if (projectListEl) projectListEl.appendChild(li);
+
+            const panel = document.createElement('div');
+            panel.className = 'detail-panel-content project-panel-content';
+            panel.dataset.projectIndex = String(index);
+            panel.hidden = true;
+            panel.innerHTML = `
+                <div class="project-panel-header">
+                    <h2>${fullTitle}</h2>
+                </div>
+                ${innerHTML}
+            `;
+            if (projectPanelsContainer) projectPanelsContainer.appendChild(panel);
+
+            const randColor = rgbMuted[Math.floor(Math.random() * rgbMuted.length)];
+            panel.style.setProperty('--highlight-color', randColor);
+        }
+
+        async function loadProjects() {
+            try {
+                const response = await fetch('index.html');
+                if (!response.ok) throw new Error('Network error');
+                const html = await response.text();
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const entries = doc.querySelectorAll('.project-entry-neutral');
+
+                if (!entries || entries.length === 0) throw new Error('No project entries found');
+
+                entries.forEach((entry, index) => {
+                    const titleEl = entry.querySelector('.project-title-neutral');
+                    const detailInner = entry.querySelector('.project-detail-neutral-inner');
+                    if (!titleEl || !detailInner) return;
+
+                    const fullTitle = titleEl.textContent.replace(/\s+/g, ' ').trim();
+                    const shortTitle = fullTitle.replace(/^(Factor IJ|The Findlings|Thesis|TrendWatching)\s*/i, '').trim() || fullTitle;
+                    renderProjectItem(fullTitle, shortTitle, index, detailInner.outerHTML);
+                });
+            } catch (err) {
+                console.warn('Loading fallback projects for local/CORS compatibility:', err);
+                const fallbackProjects = [
+                    {
+                        fullTitle: 'Factor IJ — Reversing the pinterest logic for an art-rental',
+                        shortTitle: 'Factor IJ',
+                        html: `<div class="project-detail-neutral-inner"><p>Reversing the pinterest logic for an art-rental platform and gallery in Amsterdam.</p></div>`
+                    },
+                    {
+                        fullTitle: 'The Findlings — After tethered bottle caps became mandatory...',
+                        shortTitle: 'The Findlings',
+                        html: `<div class="project-detail-neutral-inner"><p>After tethered bottle caps became mandatory in Europe, loose caps disappeared. An investigation into urban artifacts.</p></div>`
+                    },
+                    {
+                        fullTitle: 'Thesis — Testing VR as a tool for outgroup humanization',
+                        shortTitle: 'Thesis',
+                        html: `<div class="project-detail-neutral-inner"><p>Testing virtual reality simulations to measure changes in perspective-taking and empathy towards outgroups.</p></div>`
+                    },
+                    {
+                        fullTitle: 'TrendWatching — Amplify your edge',
+                        shortTitle: 'TrendWatching',
+                        html: `<div class="project-detail-neutral-inner"><p>Consumer trends and strategic foresight analysis for modern brand positioning.</p></div>`
+                    },
+                    {
+                        fullTitle: 'Greenwashing in organisations',
+                        shortTitle: 'Greenwashing in organisations',
+                        html: `<div class="project-detail-neutral-inner"><p>Empirical study analyzing corporate environmental framing and public skepticism.</p></div>`
+                    },
+                    {
+                        fullTitle: 'Take it to the web — Afghan girls education right',
+                        shortTitle: 'Take it to the web',
+                        html: `<div class="project-detail-neutral-inner"><p>Digital advocacy project supporting educational access for girls in Afghanistan.</p></div>`
+                    }
+                ];
+                fallbackProjects.forEach((proj, idx) => {
+                    renderProjectItem(proj.fullTitle, proj.shortTitle, idx, proj.html);
+                });
+            }
+        }
+
+        // Index hover interactions
+        if (aboutIndex) {
+            aboutIndex.addEventListener('mouseenter', () => {
+                document.body.classList.add('is-interacting');
+                aboutIndex.classList.add('is-hovering');
+            });
+
+            aboutIndex.addEventListener('mouseover', (e) => {
+                const target = e.target.closest('.index-item, .index-project-name');
+                if (target && aboutIndex.contains(target)) {
+                    hoverTarget = target;
+                    setHoverState(target);
+                }
+            });
+
+            aboutIndex.addEventListener('mouseleave', () => {
+                hoverTarget = null;
+                aboutIndex.classList.remove('is-hovering');
+                clearHoverClasses();
+                if (!activePanel) {
+                    document.body.classList.remove('is-interacting');
+                }
+            });
+
+            aboutIndex.addEventListener('click', (e) => {
+                const projectBtn = e.target.closest('.index-project-name');
+                if (projectBtn) {
+                    e.preventDefault();
+                    openPanel(null, parseInt(projectBtn.dataset.projectIndex, 10));
+                    return;
+                }
+
+                const sectionBtn = e.target.closest('.index-item[data-panel]');
+                if (sectionBtn) {
+                    e.preventDefault();
+                    if (sectionBtn.dataset.panel === 'projects') {
+                        openPanel(null, 0); // Open first project when projects is clicked
+                    } else {
+                        openPanel(sectionBtn.dataset.panel);
+                    }
+                }
+            });
+
+            aboutIndex.querySelectorAll('.index-item, .index-project-name').forEach(el => {
+                el.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        el.click();
+                    }
+                });
+            });
+        }
+
+        if (detailClose) {
+            detailClose.addEventListener('click', closePanel);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && detailPanel?.classList.contains('is-open')) {
+                closePanel();
+            }
+        });
+
+        loadProjects();
+
+        // Video Play-on-Hover (about panel)
         const videoBlock = document.querySelector('.about-video-block');
         const video = videoBlock ? videoBlock.querySelector('video') : null;
 
@@ -22,117 +291,111 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // 2. Moodboard Lightbox Viewer
-        const moodboardItems = Array.from(document.querySelectorAll('.moodboard-item'));
-        const lightbox = document.getElementById('moodboard-lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        const lightboxVideo = document.getElementById('lightbox-video');
-        const closeBtn = document.querySelector('.lightbox-close');
-        const prevBtn = document.getElementById('lightbox-prev');
-        const nextBtn = document.getElementById('lightbox-next');
+        // Moodboard Lightbox Viewer
+        function setupLightbox() {
+            const moodboardItems = Array.from(document.querySelectorAll('.moodboard-item'));
+            const lightbox = document.getElementById('moodboard-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxVideo = document.getElementById('lightbox-video');
+            const closeBtn = document.querySelector('.lightbox-close');
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
 
-        let currentIndex = 0;
+            if (!lightbox || moodboardItems.length === 0) return;
 
-        function updateLightbox(index) {
-            const item = moodboardItems[index];
-            const img = item.querySelector('img');
-            const video = item.querySelector('video');
+            let currentIndex = 0;
 
-            // Toggle visibility
-            if (video) {
-                lightboxVideo.src = video.src;
-                lightboxVideo.style.display = 'block';
-                lightboxImg.style.display = 'none';
-                // Store YouTube URL if available
-                lightboxVideo.dataset.youtubeUrl = video.dataset.youtubeUrl || '';
-            } else if (img) {
-                lightboxImg.src = img.src;
-                lightboxImg.style.display = 'block';
-                lightboxVideo.style.display = 'none';
-                lightboxVideo.src = ""; // Stop video if switching to image
-                lightboxVideo.dataset.youtubeUrl = '';
+            function updateLightbox(index) {
+                const item = moodboardItems[index];
+                const img = item.querySelector('img');
+                const vid = item.querySelector('video');
+
+                if (vid) {
+                    lightboxVideo.src = vid.src;
+                    lightboxVideo.style.display = 'block';
+                    lightboxImg.style.display = 'none';
+                    lightboxVideo.dataset.youtubeUrl = vid.dataset.youtubeUrl || '';
+                } else if (img) {
+                    lightboxImg.src = img.src;
+                    lightboxImg.style.display = 'block';
+                    lightboxVideo.style.display = 'none';
+                    lightboxVideo.src = "";
+                    lightboxVideo.dataset.youtubeUrl = '';
+                }
+
+                const artist = item.dataset.artist || "";
+                const title = item.dataset.title || "";
+                const year = item.dataset.year || "";
+                const medium = item.dataset.medium || "";
+                const dims = item.dataset.dims || "";
+
+                lightboxCaption.innerHTML = `
+                    ${artist ? `<span class="artist">${artist}</span>` : ""}
+                    ${title ? `<span class="title">${title}</span>` : ""}
+                    <span class="meta">
+                        ${year ? `${year}${medium || dims ? "," : ""}` : ""}
+                        ${medium ? ` ${medium}${dims ? "," : ""}` : ""}
+                        ${dims ? ` ${dims}` : ""}
+                    </span>
+                `;
+
+                currentIndex = index;
             }
 
-            // Build Exhibition Style Caption
-            const artist = item.dataset.artist || "";
-            const title = item.dataset.title || "";
-            const year = item.dataset.year || "";
-            const medium = item.dataset.medium || "";
-            const dims = item.dataset.dims || "";
+            function openLightbox(index) {
+                updateLightbox(index);
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
 
-            lightboxCaption.innerHTML = `
-                ${artist ? `<span class="artist">${artist}</span>` : ""}
-                ${title ? `<span class="title">${title}</span>` : ""}
-                <span class="meta">
-                    ${year ? `${year}${medium || dims ? "," : ""}` : ""}
-                    ${medium ? ` ${medium}${dims ? "," : ""}` : ""}
-                    ${dims ? ` ${dims}` : ""}
-                </span>
-            `;
-
-            currentIndex = index;
-        }
-
-        function openLightbox(index) {
-            updateLightbox(index);
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Prevent scroll
-        }
-
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-
-        function showNext() {
-            currentIndex = (currentIndex + 1) % moodboardItems.length;
-            updateLightbox(currentIndex);
-        }
-
-        function showPrev() {
-            currentIndex = (currentIndex - 1 + moodboardItems.length) % moodboardItems.length;
-            updateLightbox(currentIndex);
-        }
-
-        // Listeners
-        moodboardItems.forEach((item, index) => {
-            item.addEventListener('click', () => openLightbox(index));
-        });
-
-        if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-        if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
-        if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-
-        // YouTube link for lightbox videos
-        if (lightboxVideo) {
-            lightboxVideo.addEventListener('click', (e) => {
-                const youtubeUrl = lightboxVideo.dataset.youtubeUrl;
-                if (youtubeUrl) {
-                    window.open(youtubeUrl, '_blank');
-                    e.stopPropagation();
+            function closeLightboxFn() {
+                lightbox.style.display = 'none';
+                if (!detailPanel.classList.contains('is-open')) {
+                    document.body.style.overflow = '';
                 }
-            });
-        }
+            }
 
-        // Close on backdrop click (outside content)
-        if (lightbox) {
+            moodboardItems.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            if (closeBtn) closeBtn.addEventListener('click', closeLightboxFn);
+            if (prevBtn) prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateLightbox((currentIndex - 1 + moodboardItems.length) % moodboardItems.length);
+            });
+            if (nextBtn) nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                updateLightbox((currentIndex + 1) % moodboardItems.length);
+            });
+
+            if (lightboxVideo) {
+                lightboxVideo.addEventListener('click', (e) => {
+                    const youtubeUrl = lightboxVideo.dataset.youtubeUrl;
+                    if (youtubeUrl) {
+                        window.open(youtubeUrl, '_blank');
+                        e.stopPropagation();
+                    }
+                });
+            }
+
             lightbox.addEventListener('click', (e) => {
                 if (e.target === lightbox || e.target.classList.contains('lightbox-main')) {
-                    closeLightbox();
+                    closeLightboxFn();
                 }
             });
-        }
-        if (lightbox && lightboxImg) {
-            // Keyboard support
+
             window.addEventListener('keydown', (e) => {
                 if (lightbox.style.display === 'flex') {
-                    if (e.key === 'Escape') closeLightbox();
-                    if (e.key === 'ArrowRight') showNext();
-                    if (e.key === 'ArrowLeft') showPrev();
+                    if (e.key === 'Escape') closeLightboxFn();
+                    if (e.key === 'ArrowRight') updateLightbox((currentIndex + 1) % moodboardItems.length);
+                    if (e.key === 'ArrowLeft') updateLightbox((currentIndex - 1 + moodboardItems.length) % moodboardItems.length);
                 }
             });
         }
+
+        setupLightbox();
     }
 
     // 3. Grid & Moodboard Video: Play-on-Hover (Global)
@@ -174,7 +437,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* --- Projects page: Neutral-style title toggle (click open / click close) --- */
-    const rgbMuted = ['#ff9999', '#ffff99', '#ff99ff', '#99ffff', '#99ff99', '#9999ff'];
     if (isProjectsPage) {
         const entries = document.querySelectorAll('.project-entry-neutral');
 
@@ -254,24 +516,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const hajiraBtn = document.getElementById('hajira-btn');
 
         const mediaPool = [
-            { type: 'image', path: 'images/IJ_1.png' },
-            { type: 'image', path: 'images/IJ_2.png' },
-            { type: 'image', path: 'images/IJ_3.png' },
-            { type: 'image', path: 'images/IJ_4.png' },
-            { type: 'image', path: 'images/IJ_5.png' },
-            { type: 'image', path: 'images/thesis.png' },
-            { type: 'video', path: 'images/aimee.MP4' },
-            { type: 'video', path: 'images/trend.MP4' }
+            { type: 'image', path: 'images/factor_ij.jpg' },
+            { type: 'image', path: 'images/gevleugelde.jpg' },
+            { type: 'image', path: 'images/idfa_vr.jpg' },
+            { type: 'image', path: 'images/uni_image.png' },
+            { type: 'video', path: 'images/Ik ben nog niet weg.mp4' },
+            { type: 'video', path: 'images/banner.mp4' },
+            { type: 'video', path: 'images/trailer_ikben.mp4' }
         ];
 
-        if (!gallery || !hajiraBtn) {
-            return;
-        }
-
-        // Ensure the FIRST item is always the same (e.g., IJ_1.png)
+        // Ensure the FIRST item is always the same (e.g., factor_ij.jpg)
         const initialItem = mediaPool[0];
 
         function addItem(item, isNew = true) {
+            // If adding a NEW item, shrink all current ones
             if (isNew) {
                 const currentItems = gallery.querySelectorAll('.gallery-item');
                 currentItems.forEach(el => el.classList.add('old'));
@@ -279,11 +537,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const div = document.createElement('div');
             div.className = 'gallery-item';
+            // New items are full height by default (no 'old' class)
 
             if (item.type === 'image') {
                 const img = document.createElement('img');
                 img.src = item.path;
-                img.alt = 'Hajira Portfolio Media';
+                img.alt = "Hajira Portfolio Media";
                 div.appendChild(img);
             } else {
                 const video = document.createElement('video');
@@ -295,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(video);
             }
 
+            // Prepend so newest is on the left
             if (gallery.firstChild) {
                 gallery.insertBefore(div, gallery.firstChild);
             } else {
@@ -308,8 +568,11 @@ document.addEventListener('DOMContentLoaded', () => {
             addItem(item, true);
         }
 
+        // Initial Load (Always start with the same first picture)
+        // Set isNew to false for the very first item so it starts full height
         addItem(initialItem, false);
 
+        // Click Logic: Prepend new items, shrink others
         hajiraBtn.addEventListener('click', (e) => {
             e.preventDefault();
             addRandomItem();
