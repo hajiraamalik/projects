@@ -1648,7 +1648,7 @@ a {
 
 .about-page.panel-open .index-item.is-selected,
 .about-page.panel-open .index-project-name.is-selected {
-    color: var(--about-red) !important;
+    color: #000000 !important;
     filter: none !important;
     opacity: 1 !important;
 }
