@@ -76,22 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 if (projectIndex !== null) {
                     const projectPanel = document.querySelector(`.detail-panel-content[data-project-index="${projectIndex}"]`);
-                    const projectBtn = document.querySelector(`.index-project-name[data-project-index="${projectIndex}"]`);
                     if (projectPanel) {
                         projectPanel.hidden = false;
                         activePanel = `project-${projectIndex}`;
                     }
-                    if (projectBtn) projectBtn.classList.add('is-selected');
-                    const mainProjBtn = document.querySelector('.index-item[data-panel="projects"]');
-                    if (mainProjBtn) mainProjBtn.classList.add('is-selected');
                 } else {
                     const panel = document.querySelector(`.detail-panel-content[data-panel="${panelId}"]`);
-                    const navBtn = document.querySelector(`.index-item[data-panel="${panelId}"]`);
                     if (panel) {
                         panel.hidden = false;
                         activePanel = panelId;
                     }
-                    if (navBtn) navBtn.classList.add('is-selected');
                 }
 
                 initPanelVideos();
