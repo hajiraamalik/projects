@@ -809,6 +809,61 @@ a {
 
 .about-sectionIndent {
     font-size: clamp(14px, 4vw, 23px);
+
+/* River overlay animation (centered on homepage) */
+.river-center-wrapper {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 500;
+}
+.river-container {
+    position: relative;
+    width: min(80vw, 900px);
+    max-width: 1000px;
+}
+.river-container img.white-river {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+.river-container img.blue-river {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    opacity: 0;
+    animation: revealBlue 3s ease forwards;
+}
+
+@keyframes revealBlue {
+    0% { opacity: 0; transform: scale(1); filter: saturate(0.95); }
+    70% { opacity: 1; transform: scale(1.002); filter: none; }
+    100% { opacity: 1; transform: scale(1.004); filter: none; }
+}
+
+.river-container img.white-river {
+    animation: ghostWhite 1.8s ease forwards;
+    animation-delay: 3s;
+}
+
+@keyframes ghostWhite {
+    0% { filter: none; opacity: 1; transform: scale(1); }
+    100% { filter: blur(2px) drop-shadow(0 0 30px rgba(255,255,255,0.9)) brightness(1.05) contrast(1.05); opacity: 0.86; transform: scale(1.002); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .river-container img.blue-river { animation: none; opacity: 1; }
+    .river-container img.white-river { animation: none; filter: drop-shadow(0 0 12px rgba(255,255,255,0.6)); opacity: 0.9; }
+}
     font-weight: 300;
     line-height: 1.6;
     letter-spacing: -0.02em;
