@@ -1309,17 +1309,33 @@ a {
 
 .seedbank-urdu-copy {
     width: 100%;
-    max-width: 760px;
     text-align: right;
     direction: rtl;
     font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Scheherazade New", serif;
     font-size: clamp(1.1rem, 2vw, 2rem);
     line-height: 1.8;
-    color: #fe002;
+    color: #000;
 }
 
 .seedbank-urdu-copy p {
     margin: 0;
+}
+
+.chai-translations {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    width: 60%;
+    margin: 32px auto 0;
+    align-items: start;
+}
+
+.chai-english {
+    text-align: left;
+}
+
+.chai-translations .seedbank-urdu-copy {
+    text-align: right;
 }
 
 .about-video-block video {
@@ -1426,6 +1442,16 @@ a {
 
     .moodboard-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chai-translations {
+        grid-template-columns: 1fr;
+        width: min(100% - 32px, 400px);
+        gap: 24px;
+    }
+
+    .chai-translations .seedbank-urdu-copy {
+        text-align: right;
     }
 }
 
