@@ -8,50 +8,51 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="about-page">
 
-    <div class="river-center-wrapper" aria-hidden="true">
-        <div class="river-container">
-            <img src="images/whiteriver.png" alt="" class="white-river">
-            <img src="images/blueriver.png" alt="" class="blue-river">
-        </div>
-    </div>
+<body class="about-page">
 
     <div class="layout about-layout">
 
-        <div class="fixed-element top-right">
-            <img src="images/urdu_name_correct.png" alt="Hajira Malik in Urdu" class="urdu-name-img">
+        <div class="fixed-element top-right"><a href="about.html">
+                <img src="images/urdu_name_correct.png" alt="Hajira Malik in Urdu" class="urdu-name-img"></a>
         </div>
 
         <div class="fixed-element top-left">
-            <div class="english-name">hajira malik
+            <div class="english-name"><a href="about.html">hajira malik</a>
                 <div class="pronunciation-tooltip">pronounced <s>hajeera</s> haj-ra<br>
                     <span class="def-italic">emigration, flight</span>
                 </div>
             </div>
         </div>
 
-        <nav class="boxed-nav">
-            <a href="about.html" class="nav-box icon-box">i</a>
-            <a href="index.html" class="nav-box link-box">projects</a>
-        </nav>
+         <!-- home image -->
+            <img src="images/kura.JPG" class="home-page">
+                                
 
-        <!-- Section index -->
+
+        <!-- Main section index (column 1) -->
         <nav class="about-index" id="about-index" aria-label="Site sections">
-            <div class="about-index-main">
-                <button type="button" class="index-item index-h1" data-panel="about">about</button>
-                <button type="button" class="index-item index-h2" data-panel="projects">projects</button>
-                <button type="button" class="index-item index-h2" data-panel="catalogue-1">catalogue # 1</button>
-                <button type="button" class="index-item index-h2" data-panel="catalogue-2">catalogue # 2</button>
-                <button type="button" class="index-item index-h2" data-panel="contact">contact</button>
-            </div>
-
-            <div class="about-index-projects" id="about-index-projects">
-                <ul class="index-project-list" id="index-project-list">
-                    <!-- Populated from index.html by script.js -->
-                </ul>
-            </div>
+            <button type="button" class="index-item index-h1" data-panel="about">about</button><br>
+            <button type="button" class="index-item index-h2" data-panel="projects"
+                id="index-projects-btn">projects</button>
+            
+            <button type="button" class="index-item index-h2" data-panel="catalogue-2">video # 1</button>
+            <button type="button" class="index-item index-h2" data-panel="catalogue-3">video #
+                2</button>
+            <button type="button" class="index-item index-h2" data-panel="seedbank">seedbank</button>
+            <br><br><br><br>
+            <button type="button" class="index-item index-h2" data-panel="contact">contact</button>
         </nav>
+
+
+
+        <!-- Projects sub-index (column 2) -->
+        <nav class="about-sub-index" id="about-sub-index" aria-label="Projects" aria-hidden="true">
+            <ul class="index-project-list" id="index-project-list">
+                <!-- Populated from index.html by script.js -->
+            </ul>
+        </nav>
+
 
         <!-- Right detail panel -->
         <aside class="about-detail-panel" id="about-detail-panel" aria-hidden="true">
@@ -61,96 +62,738 @@
                 <div class="detail-panel-content" data-panel="about" hidden>
                     <div class="about-top-grid">
                         <div class="about-bio-col">
-                            <p>As a lil teen, I used to binge-watch social impact ads from India and Pakistan. Something about how they challenged norms and activated public conversation. And before going to bed, I typically had a chain of questions to interrogate mom & dad, until they were frustrated. That's probably where this started.</p>
-                            <p class="about-sectionIndent">I grew up in a space where global and Western perspectives were more visible than local ones. Some realities felt distant even when they were close. Being from a minority background made questions of representation, power, and voice even more immediate. I became aware early on that meaning is never neutral, that it is deliberately molded, and that it can be remade as well.</p>
-                            <p class="about-sectionIndent">That awareness and curiosity got me to study Communication Science at the University of Amsterdam. There, I explored how media, campaigns, news, entertainment, digital platforms, and the like are produced, received, and interpreted within social contexts. I also trained in empirical research methods, including surveys, experiments, content analysis, and qualitative methods to study how (communication) environments influence perception and behaviour.</p>
+                            <p>As a lil teen, I used to binge-watch social impact ads from India and Pakistan. Something about the way they challenged norms and activated public conversation. And before going to bed, I typically had a chain of questions to interrogate mom & dad, until they were frustrated. That's probably where this started. 
+                            </p>
+                            <p class="about-sectionIndent">I grew up in a space where global and Western perspectives were more visible than local ones. Some realities felt distant even when they were near. Issues of representation, power and voice were that much more immediate having grown up with a minority background. For that, I became aware early on that meaning is never neutral, that it is deliberately molded, and that it can be reformed too. 
+                            </p>
+                            <p class="about-sectionIndent">That awareness and curiosity got me to study Communication Science at the University of Amsterdam. There, I explored how media, campaigns, news, entertainment, digital platforms, and the like are produced, received, and interpreted within social contexts. I also trained in empirical research methods including surveys, experiments, content analysis, and qualitative methods to study how (communication) environments influence perception and behaviour.
+                            </p>
+                            <p class="about-sectionIndent">Since graduating, I have become increasingly interested in work that uses research to inform tangible change.I have been exploring how research and analysis can feed into interventions, campaigns, programmes, policies, services and experiences, particularly in the context of social impact. As I move forward, I hope to continue working on understanding and learning from how we experience the systems we take, whose and what perspectives are absent from decision making. And to build on research-based approaches that are more responsive, equitable and grounded in the realities of the people they affect. 
+                            </p>
                         </div>
-                        <div class="about-img-col">
-                            <div class="about-portrait-placeholder">
-                                <div class="about-portrait-blank">portrait placeholder</div>
-                                <span class="portrait-caption">Photo Credit: <span class="caption-link">Placeholder</span></span>
-                            </div>
+                        <div class="about-portrait-placeholder">
+                            <img src="images/IMG_7309.JPG" alt="Hajira Malik portrait placeholder"
+                                class="about-portrait-img">
                         </div>
                     </div>
                 </div>
 
                 <!-- Contact -->
                 <div class="detail-panel-content" data-panel="contact" hidden>
-                    <div class="about-contact detail-contact">
+                    <div class="detail-contact">
                         <p>amsterdam, islamabad</p>
+                    </div>
+                    <div class="about-contact">
                         <p><a href="mailto:hajiramalik4@outlook.com">hajiramalik4@outlook.com</a></p>
                         <p><a href="https://www.linkedin.com/in/hajiramalik" target="_blank">linkedin</a></p>
                         <p><a href="https://www.instagram.com/hajiraa.malik/" target="_blank">instagram</a></p>
                     </div>
                 </div>
 
-                <!-- Picture catalogue 1 (moodboard moved here) -->
-                <div class="detail-panel-content" data-panel="catalogue-1" hidden>
-                    <section class="moodboard-section">
-                        <p>this is a work in progress of things i find inspiring and things (*) i've been working on.<br><br></p>
-                        <div class="moodboard-grid">
-                            <div class="moodboard-item">
-                                <video src="images/straatvolkunst2025.mp4" muted loop playsinline data-youtube-url="https://youtu.be/-_3PZiXKd8U?si=nVyexoThPWmWG-Qh"></video>
-                                <span class="own-mark">*</span>
+              
+
+                <!-- Video # 1 -->
+                <div class="detail-panel-content" data-panel="catalogue-2" hidden>
+                    <div class="about-video-block seedbank-audio-video" data-sound="true">
+                                <video autoplay controls playsinline preload="metadata">
+                                    <source src="images/chai (1).mp4" type="video/mp4">
+                                </video>
                             </div>
-                            <div class="moodboard-item">
-                                <img src="images/JOYLAND.jpg" alt="">
+
+                            <p>[chai lattes. dirty chai. spiced chai. this is a commentary from my nani (grandma) on making chai. this piece is part of a reflection on the modern-day colonisation of chai, its extraction from South Asian culture and its repackaging as a Western lifestyle commodity.]</p>
+
+                            <div class="seedbank-urdu-copy" dir="rtl">
+                                <p>اچھا، پانی اور دودھ، چینی، پتی ملا کے چولہے کے اوپر رکھ دیا۔<br>
+                                     پانچ، سات اُبالے آئے تو چولہا بند کر دیا۔<br>
+                                         چھلنی سے چھان کے کپ میں ڈال کر، تو پی لی۔<br>
+گیس نہ ہو تو پھر سیلنڈر استعمال کر لیتے ہیں ۔<br>
+                                         پہلے زمانے میں لکڑیاں جلاتے تھے، اور گائے کی پاٹی۔<br>
+                                         اس پہ چائے بناتے تھے۔<br>
+                                            ہاں، گیس نہ ہو نا تو پھر سیلنڈر استعمال کرتے تھے۔<br>
+                                         پہلے تو لکڑیاں اور گائے کی پاٹی، اس پہ چائے بناتے تھے۔<br>
+                                </p>
                             </div>
-                            <div class="moodboard-item" data-title="aik aur pakeezah">
-                                <img src="images/aikaurpakeezah.jpg" alt="">
+                            <div class="about-bio-col">
+                                 Well, mix  water, milk, sugar, and tea leaves together and put it on the stove. Once it has come to a boil five or seven times, you turn the stove off. Strain it through a sieve  into a cup and drink it. <br>
+                                    If there is no gas, then we use a gas cylinder instead. In the old days, we used to burn wood, and cow dung too. We used to make chai over that.<br>
+                                Yes, if there was no gas, then we would use a cylinder instead. Before that, we used to make chai over wood and cow dung.<br>
                             </div>
-                            <div class="moodboard-item">
-                                <img src="images/about_1.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <video src="images/azaadi.mp4" muted loop playsinline data-youtube-url="https://youtu.be/JkNNyVq222U?si=l4OzyNveiMil57M5"></video>
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/ascii_mob.png" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/organicshapes.png" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7662.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7667.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7687.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7699.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7706.JPG" alt="">
-                                <span class="own-mark">*</span>
-                            </div>
-                            <div class="moodboard-item">
-                                <img src="images/IMG_7718.JPG" alt="">
-                                <span class="own-mark">*</span>
+                </div>
+
+                <!-- Video # 2 -->
+                <div class="detail-panel-content" data-panel="catalogue-3" hidden>
+                    <a href="https://youtu.be/JkNNyVq222U?si=l4OzyNveiMil57M5" target="_blank" class="about-video-link">
+                        <div class="about-video-block">
+                            <video autoplay muted loop playsinline>
+                                <source src="images/azaadi.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Seedbank -->
+                <div class="detail-panel-content" data-panel="seedbank" hidden>
+                    <div class="about-top-grid">
+                        <div class="about-bio-col">
+                            <p>RITUALS. I can mind- and endlessly walk through the streets. 
+                            I have lived through n̶i̶n̶e̶ twelve houses. Crates of dasheri mangoes. 
+                            The old Ali Sethi, the new Ali Sethi. Every Sunday afternoon, we would go 
+                            over to my great-grandpa's place & learn from him. Every week, he would gather 
+                            materials to talk about. It would be something he listened to on the radio, 
+                            or the newspaper, or a book he was reading, or the Urdu kids' magazine he would get. 
+                            ART GALLERIES. He would make us paper windmills from gum wrappers. There were many 
+                            conversations we had, most of which I don't remember but truthfully miss. Those were my 
+                            anchoring moments. Braided willow roots and playing choon choon cha cha on 
+                            Lali’s wrinkly hands. PEOPLE. Funky weird things. The rani’s tear sprouting a pond. If 
+                            only I could show him me in front of the same WINDMOLEN he was at decades ago. The swing 
+                            I broke in my grandma's garden. SAND. sawan ki barish wali mitti. </p> 
+                        </div>
+                            <br>
+
+                        <div class="seedbank-video-stack">
+                            <div class="about-video-block">
+                                <video autoplay muted loop playsinline>
+                                    <source src="images/tollinton market.mov" type="video/mp4">
+                                </video>
                             </div>
                         </div>
-                    </section>
+                            
+                    </div>
                 </div>
 
-                <!-- Picture catalogue 2 (placeholder) -->
-                <div class="detail-panel-content" data-panel="catalogue-2" hidden>
-                    <p class="catalogue-placeholder">picture catalogue 2 — coming soon.</p>
-                </div>
+                <!-- Project panels -->
+                <div id="project-panels-container">
 
-                <!-- Project panels injected by script.js -->
-                <div id="project-panels-container"></div>
+                    <!-- Project 0 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="0"
+                        hidden>
 
+                        <div class="project-detail-neutral about-panel-project">
+
+                            <div class="project-detail-neutral-inner">
+                                <h2 class="project-title-neutral"> Factor IJ: A lot of coffee and art </h2>
+                                <div class="neutral-project-grid">
+                                    <!-- Header Row (Values only, no labels) -->
+                                    <div class="neutral-header-cell" style="grid-column: 2;">Research & Strategy</div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;">
+                                        Content strategy <br> Qualitative Research <br> Audience & Stakeholder Insight <br> Narrative Development <br> 
+                                        Communication Strategy <br> Project Coordination <br> Multi-channel Implementation
+                                    </div>
+
+                                    <!-- Content Row with White Dividers -->
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title"> Reversing the pinterest logic for an
+                                                art-rental.
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                <p>Factor IJ is a cultural hub and kunstuitleen in Amsterdam-IJburg.
+                                                    When I
+                                                    joined Factor IJ, communication across channels was inconsistent,
+                                                    and there was no coherent system for how artists or exhibitions
+                                                    were introduced to the
+                                                    public.
+                                                </p>
+                                                <p class="indent-para">I led communication strategy and execution for the multiple organization pillars. I began by leading qualitative research into how participating artists experienced the platform’s role in their visibility and legitimacy, alongside an audit of existing communication channels to understand what was working, what was not, and where improvements were most needed. We saw that the audiences were engaging with artworks primarily through aesthetic references. And that to better preserve the emotional and cultural depth of the works, it was crucial to correct the object-led presentation to narrative-led framing, foregrounding process, motivation, and authorship. 
+                                                </p>
+                                                <p class="indent-para">I translated these insights into a revised communication approach across artist interviews, exhibition narratives, press outreach, cultural listings, social media, print and newsletters. My focus was on shaping how the exhibition would be interpreted before audiences physically encountered it.
+                                                </p>
+                                                <p class="indent-para">This changed the way people interpreted and discussed the artworks, increasing the perceived value of artists in the rental system and generating a more cohesive narrative across platforms. These adjustments were reflected in platform metrics, with Instagram followers growing from 3,400 to 4,000, email open rates increasing from 40% to 62.7%, and we noticed more engaged discussions around artworks.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Media Grid -->
+                                <div class="neutral-media-grid-container">
+                                    <!-- Vertical Dividers (now spanning the single grid row) -->
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="https://www.instagram.com/reel/DKPfLq2iNSH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/IJ_1.png" alt="Factor IJ example"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                What if you could hear the horizon?</div>
+                                        </a>
+
+                                        <a href="https://www.instagram.com/reel/DK1_plGI7Gs/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/IJ_4.png" alt="Factor IJ example"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                Artist from the collection: Arthur Martin</div>
+                                        </a>
+                                    </div> <!-- Column 2 Stacking -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="https://www.instagram.com/p/DJUQLPyxATD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/IJ_2.png" alt="Factor IJ example"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                It feels like something I’ve seen before in everyday life, something I
+                                                grew
+                                                up with.</div>
+                                        </a>
+                                        <a href="https://www.instagram.com/p/DLH9YQjRg3I/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/IJ_5.png" alt="Factor IJ example"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!-- Column 3 Stacking -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="https://www.instagram.com/p/DIyyHqNPu4B/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/IJ_3.png" alt="Factor IJ example"
+                                                style="aspect-ratio: 4 / 3;">
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                SPOTLIGHT: Aimée Phillips</div>
+                                        </a>
+                                        <a href="https://www.instagram.com/reel/DI1ITVyijSF/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <video src="images/aimee.MP4"
+                                                style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; pointer-events: none;"
+                                                muted loop playsinline></video>
+                                        </a>
+
+
+                                    </div>
+
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- project 0 end -->
+
+                    <!-- Project 1 -->
+
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="1"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">The Findlings: Blue bottle caps are gone from the
+                                    streets</h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2; grid-row: 2;">Concept &
+                                        Campaign</div>
+                                    <div class="neutral-header-cell" style="grid-column: 4; grid-row: 2;">Campaign
+                                        Strategy <br>
+                                        Press
+                                        <br> Print Design <br> Event Listings <br> Social Sontent <br> Newsletter
+                                    </div>
+
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6; grid-row: 3;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">After tethered bottle caps became
+                                                mandatory,
+                                                they quietly disappeared from the streets. What used to be everywhere
+                                                suddenly became rare and therefore noticeable.
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11; grid-row: 3;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                For Factor IJ Presenteert: <i>The Findlings</i>, Maas van Duijnhoven
+                                                transformed
+                                                street-found waste into eight creatures tied to different Amsterdam
+                                                neighborhoods, inviting people to look down again and reconsider what
+                                                the
+                                                city leaves behind.
+                                                </p>
+                                                <p class="indent-para">For this exhibition too, we prioritised a narrative entry point over a simple exhibition announcement, framing street-found waste as part of Amsterdam's waste system. As a result, audiences were encouraged to engage with the work as something connected to “what the city leaves behind”, as opposed to simply “nice waste creatures.” 
+                                                </p>
+                                                <p class="indent-para">As Communication Lead, I developed and executed the campaign strategy and four-week work plan, coordinated the campaign budget, and managed the communications and outreach elements required to take the project from planning through to launch. The rollout included press outreach, cultural listings, printed posters and flyers, social media and a three-phase newsletter campaign. I also conceptualized the “Day Out with the Artist” reel, which reached 12.4K views (7K organic) on a 3,900‑follower account, about three times the usual audience.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Media Grid -->
+                                <div class="neutral-media-grid-container">
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                        <div class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; min-height: 0; height: auto;">
+                                            <div
+                                                style="width: 100%; aspect-ratio: 1 / 1.414; overflow: hidden; position: relative;">
+                                                <iframe src="images/findlings_3.pdf#toolbar=0&navpanes=0&view=FitH"
+                                                    style="width: 110%; height: 100%; border: none; position: absolute; top: -1%; left: -5%; pointer-events: auto;"
+                                                    title="Findlings Press Release">
+                                                </iframe>
+                                            </div>
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 10px 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                What does our trash tell us about Amsterdam?</div>
+                                        </div>
+                                    </div>
+                                    <!-- Column 2 Stacking -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="https://www.instagram.com/reel/DOv6CM5jEwD/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/findlings_1.png" alt="Maas van Duijnhoven?"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size:18px; font-weight: 400; text-align: left; margin: 10px 10px 0 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                Day out with artist.</div>
+                                        </a>
+                                    </div>
+                                    <!-- Column 3 Stacking -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                        <div class="neutral-media-tile"
+                                            style="min-height: 0; height: auto; padding: 10px 0;">
+                                            <div style="display: flex; gap: 2px; width: 100%; background-color: white;">
+                                                <img src="images/findlings_front.png"
+                                                    style="flex: 1; height: auto; display: block; object-fit: cover; min-width: 0;"
+                                                    alt="The Findlings Front">
+                                                <img src="images/findlings_back.png"
+                                                    style="flex: 1; height: auto; display: block; object-fit: cover; min-width: 0;"
+                                                    alt="The Findlings Back">
+                                            </div>
+                                            <div
+                                                style="font-size: 18px; font-weight: 400; text-align: left; margin: 10px 10px 0 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                Flyer deisgn</div>
+                                        </div>
+
+                                        <a href="https://www.instagram.com/p/DOf5Vf2DIg2/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                                            target="_blank" rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; ; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/findlings_4.png" alt="Factor IJ example"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+
+                            <!-- project 1 end -->
+                        </div>
+
+                    </div>
+
+
+                    <!-- Project 2 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="2"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">Thesis: Testing VR as a tool for outgroup humanization
+                                </h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2;">Entertainment
+                                        Communication
+                                    </div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;">Experimental Research
+                                        <br>
+                                        Operationalisation <br> Audience & Behavioural Insight <br>
+                                        Mediated Intergroup Contact <br>
+                                        VR Social Research<br>
+                                    </div>
+
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">Research Question: To what extent does the 
+                                                level of immersion (360° video in VR versus 360° on desktop) influence 
+                                                out-group humanization, and to what extent is this effect mediated by 
+                                                narrative transportation while this indirect effect is moderated by in-group i
+                                                dentification with one’s own social/ ethnic group?
+
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                VR is repeatedly branded as the “ultimate empathy machine,” a medium that can place someone inside another person’s reality to dissolve the distance between them. In my thesis, I wanted to test that assumption more critically, as in does immersion actually translate into greater openness toward people outside our own social group?
+                                                </p>
+                                                <p class="indent-para">Using the documentary <i>My Mother’s
+                                                        Wing</i>, I
+                                                    conducted
+                                                    an experiment comparing VR immersion with desktop viewing. I measured participants' sense of presence, emotional engagement and attitudes toward a marginalized out-group after exposure to experiences of occupation and structural violence. VR significantly increased feelings of presence and emotional intensity, but participants’ attitudes remained largely unchanged. Immersion did not destabilize existing spectatorship, as people filtered the experience through their social and political identities.
+
+                                                </p>
+                                                <p class="indent-para">The findings suggest that VR works less as a standalone empathy tool and more as a context-dependent medium. It can deepen emotional proximity but cannot, on its own, disrupt deeply held beliefs. This prompted me to ask whether participation, agency, and context could possibly be more effective in enabling engaged contact to foster overall change in humanization. 
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Media Grid -->
+                                <div class="neutral-media-grid-container">
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                        <a href="https://youtu.be/aEkGUnhVJGA?si=L5B7ybAyc7Mo81Qy" target="_blank"
+                                            rel="noopener noreferrer" class="neutral-media-tile"
+                                            style="display: flex; flex-direction: column; padding: 10px 0; text-decoration: none; color: inherit; height: auto; min-height: 0;">
+                                            <img src="images/thesis.png" alt="My Mother'ss Wing"
+                                                style="width: 100%; height: auto; display: block; object-fit: cover;">
+                                            <div
+                                                style="font-size:18px; font-weight: 400; text-align: left; margin: 10px 10px 0 10px; line-height: 1.2; letter-spacing: -0.01em;">
+                                                My Mother's Wing.</div>
+                                        </a>
+                                    </div>
+
+                                    <!-- Column 2 (Empty) -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 3 (Empty) -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+
+                            <!-- project 2 end -->
+                        </div>
+
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="3"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">TrendWatching: Amplify your edge</h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2;">Strategy & Concept Design
+                                    </div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;">Campaign Strategy <br> User
+                                        Research <br> Onboarding Dtrategy <br> Mockup design <br> Project Planning <br>
+                                        Budget Management <br> Coordination
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">TrendWatching had a conversion problem.
+                                                Free-trial users were skimming content without realizing the platform’s
+                                                full value. The main reason was that the platform felt dense and
+                                                overwhelming from the moment users landed on it, and many left before
+                                                the value clicked.
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                <p>
+                                                    To overcome this, I mapped the exact moment when users should
+                                                    understand how the platform supports their work and then built
+                                                    backward from that point. The result was Amplify Your EDGE, a guided
+                                                    onboarding experience with gamified milestones designed to make the
+                                                    value feel immediate versus delayed. </p>
+                                                <p class="indent-para">
+                                                    I led the design of Amplify Your EDGE, created all the mockups,
+                                                    managed the project budget, and the social (LinkedIn and Instagram)
+                                                    messaging strategy. The project was awarded Best in Class by a UvA
+                                                    lecturer and a former TrendWatching employee.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="neutral-media-grid-container">
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                        <video src="images/trend.MP4"
+                                            style="width: 100%; object-fit: cover; display: block; pointer-events: none;"
+                                            muted loop playsinline autoplay></video>
+                                    </div>
+                                    <!-- Column 2 Stacking -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 3 Stacking -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+
+                            <!-- project 3 end -->
+                        </div>
+
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="4"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">Greenwashing in organisations</h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2;"> Qualitative Research</div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;"> 
+                                        Semi-structured Interviews<br> Stakeholder Perspectives <br>                                        
+                                        Thematic Analysis<br>Sustainability
+                                        Communications
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">“Transparency beats perfection every
+                                                time.”
+                                                Most people are skeptical of corporate sustainability claims, but
+                                                what
+                                                actually makes a brand feel credible versus performative?
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                Through semi‑structured interviews with six working professionals, I
+                                                explored how people evaluate sustainability messaging and identify
+                                                greenwashing. Participants expected sustainability efforts but
+                                                frequently
+                                                questioned the motives behind them. Sustainability initiatives were
+                                                often
+                                                perceived as driven by profit, reputation management, or external
+                                                pressure
+                                                rather than genuine commitment. A common belief that sustainability
+                                                and
+                                                profitability are hard to reconcile, especially at scale, reinforced
+                                                that
+                                                skepticism.
+                                                </p>
+                                                <p class="indent-para">At the same time, brands that acknowledged
+                                                    limitations and trade‑offs were trusted more than those presenting
+                                                    everything as solved. The project highlighted how transparency and
+                                                    honesty in sustainability communication can build trust even when
+                                                    the efforts are far from perfect.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-media-grid-container">
+                                        <div class="m-v-divider m-v-1"></div>
+                                        <div class="m-v-divider m-v-2"></div>
+                                        <div class="m-v-divider m-v-3"></div>
+                                        <div class="m-v-divider m-v-4"></div>
+
+                                        <!-- Column 1 Stacking -->
+                                        <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                        </div>
+                                        <!-- Column 2 Stacking -->
+                                        <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                        </div>
+                                        <!-- Column 3 Stacking -->
+                                        <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                        </div>
+                                    </div>
+                                    <div style="height: 8px;"></div>
+                                </div>
+                            </div>
+
+                            <!-- project 4 end -->
+                        </div>
+
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="5"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">Take it to the web</h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2;">Political Communication
+                                    </div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;">Campaign Strategy <br>
+                                        Advocacy Communications<br> Stakeholder Mapping<br> Storytelling for impact
+                                    </div>
+
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">What would it take to make a systemic
+                                                injustice impossible to ignore?
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                We started by mapping the issue ecosystem, identifying key actors
+                                                across international institutions, regional governments, and civil
+                                                society, and analysing where narrative leverage existed and where
+                                                pressure was being left on the table. This included mapping
+                                                Pakistan’s relationship with the Taliban as an underactivated
+                                                pressure point and outlining advocacy strategies using humanitarian,
+                                                economic, and religious arguments to pressure stakeholders.
+
+                                                <p class="indent-para"> From there, the strategy centered on
+                                                    storytelling, using social media, short video content, and
+                                                    documentaries to humanize the crisis and mobilize public action.
+                                                    The idea included leveraging global petitions, partnerships with
+                                                    organizations like UNESCO, and collaborations with influencers
+                                                    and advocates to run cross-platform campaigns on Instagram,
+                                                    TikTok, and YouTube.</p>
+                                                <p class="indent-para">
+                                                    Even as a concept, the project showed how strategic
+                                                    communication and storytelling can make an injustice harder to
+                                                    look away from.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="neutral-media-grid-container">
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 2 Stacking -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 3 Stacking -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+
+                            <!-- project 5 end -->
+                        </div>
+
+                    </div>
+
+                     <!-- Project 6 -->
+                    <div class="detail-panel-content project-panel-content project-entry-neutral" data-project-index="6"
+                        hidden>
+
+                        <div class="project-detail-neutral about-panel-project">
+                            <div class="project-detail-neutral-inner">
+                                <h class="project-title-neutral">Media Framing & Visibility of Migration</h>
+                                <div class="neutral-project-grid">
+                                    <div class="neutral-header-cell" style="grid-column: 2;">News Media Content Analysis
+                                    </div>
+                                    <div class="neutral-header-cell" style="grid-column: 4;"> 
+                                    Content Analysis <br>
+                                    Media Framing<br>
+                                    Indicator Operationalisation<br>
+                                    Coding Framework Development<br>
+                                    Human Rights & Migration
+                                    </div>
+
+                                    <div class="neutral-content-cell" style="grid-column: 2 / 6;">
+                                        <div class="neutral-divider-wrap">
+                                            <h3 class="neutral-project-title">Research Question: To what extent do articles about 
+                                            immigration in Europe from The Guardian differ in regard to the economic 
+                                            frame and the human interest frame between Jan 1, 2015, to Jan 1, 2020?
+                                            </h3>                                        
+                                        </div>
+                                    </div>
+                                    <div class="neutral-content-cell" style="grid-column: 7 / 11;">
+                                        <div class="neutral-divider-wrap has-right">
+                                            <div class="neutral-body-text">
+                                                <p>Our group project examined how The Guardian framed immigration in Europe between 
+                                            2015 and 2020, comparing the prominence of economic and human-interest frames. The project 
+                                            was situated in a broader question of how news media construct immigration as a social and 
+                                            political issue through elements of second-level agenda setting. This was particularly 
+                                            important because, as Harsha Walia argues in Border and Rule, migration is often represented 
+                                            as a “crisis” without sufficient attention to the political and economic structures that produce 
+                                            displacement and shape who is permitted to move. Media framing therefore influences whether 
+                                            immigration is understood primarily through questions of economic costs and resources, or through 
+                                            individual experiences and humanitarian concerns. </p>
+                                            
+                                            <p class="indent-para">
+                                            The two frames were operationalized to develop a coding scheme. Economic framing included references 
+                                            to welfare benefits, fiscal costs and labour considerations, while human-interest framing 
+                                            included personal stories, emotional language and attention to how individuals were affected. 
+                                            Then, using Nexis Uni, we identified 880 relevant articles and systematically sampled 230 for coding. 
+                                            A chi-square analysis showed that economic framing was significantly more prominent than human-interest 
+                                            framing, leading us to reject our original hypothesis.</p> <br>    
+                                                <h3 class="neutral-project-title">Individual Visibility Analysis.
+                                            </h3>
+                                            <br>
+                                               Prior to the group analysis, each group member conducted an individual 
+                                               visibility analysis, narrowing the broader question of news media framing 
+                                               into a specific case. For this, I focused on examining how frequently 
+                                               undocumented immigration among Syrian refugees appeared in The New York Times, 
+                                               The Canadian Press, and The Guardian between 2015 and 2023.
+                                                <p class="indent-para">The analysis showed that coverage was concentrated 
+                                                on the years immediately after the 2015 European migration crisis, with 
+                                                visibility varying greatly between outlets and declining in the later years 
+                                                of the sample. The results were constrained by the scope of the sample and 
+                                                database but underscored how fleeting sustained attention on a humanitarian 
+                                                issue can be in mainstream media discourse. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="neutral-media-grid-container">
+                                    <div class="m-v-divider m-v-1"></div>
+                                    <div class="m-v-divider m-v-2"></div>
+                                    <div class="m-v-divider m-v-3"></div>
+                                    <div class="m-v-divider m-v-4"></div>
+
+                                    <!-- Column 1 Stacking -->
+                                    <div style="grid-column: 2; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 2 Stacking -->
+                                    <div style="grid-column: 4; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                    <!-- Column 3 Stacking -->
+                                    <div style="grid-column: 6; display: flex; flex-direction: column; gap: 10px;">
+                                    </div>
+                                </div>
+                                <div style="height: 8px;"></div>
+                            </div>
+
+                            <!-- project 6 end -->
+                        </div>
+
+                    </div>
+
+                </div> <!-- project panel end -->
+
+
+                <!-- bigger div close dont even touch em -->
             </div>
         </aside>
     </div>
@@ -175,4 +818,3 @@
 </body>
 
 </html>
-
