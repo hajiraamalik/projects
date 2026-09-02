@@ -1312,7 +1312,7 @@ a {
     text-align: right;
     direction: rtl;
     font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Scheherazade New", serif;
-    font-size: clamp(1.1rem, 2vw, 2rem);
+    font-size: 16px;
     line-height: 1.8;
     color: #000;
 }
